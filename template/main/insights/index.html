@@ -1,0 +1,118 @@
+{% extends "main/base.html" %}
+
+{% block title %}{% if active_category %}{{ active_category.name }} Insights{% else %}Insights{% endif %} | Big Scoop Studio{% endblock title %}
+
+{% block meta %}
+<meta name="description" content="{% if active_category %}{{ active_category.name }} insights from Big Scoop Studio — sharp thinking on digital growth, e-commerce, AI automation, and CRM strategy for Indian founders.{% else %}Insights from Big Scoop Studio on e-commerce strategy, AI automation, CRM systems, digital architecture, and technology decisions for Indian D2C brands and founders.{% endif %}">
+<meta name="keywords" content="e-commerce insights India, digital strategy India, CRM insights, AI automation blog India, D2C growth India, Indian founders blog, technology strategy India, digital infrastructure India">
+<link rel="canonical" href="https://www.bigscoopstudio.com/insights/{% if active_category %}category/{{ active_category.slug }}/{% endif %}">
+
+<meta property="og:site_name" content="Big Scoop Studio">
+<meta property="og:title" content="{% if active_category %}{{ active_category.name }} — {% endif %}Insights for Indian Founders | Big Scoop Studio">
+<meta property="og:description" content="Sharp thinking on e-commerce, AI automation, CRM systems, and digital infrastructure for Indian brands that are serious about growth.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.bigscoopstudio.com/insights/">
+<meta property="og:locale" content="en_IN">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Insights — Big Scoop Studio">
+<meta name="twitter:description" content="Sharp thinking on e-commerce, AI automation, CRM, and digital infrastructure for Indian founders.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Big Scoop Studio Insights",
+  "url": "https://www.bigscoopstudio.com/insights/",
+  "description": "Insights on e-commerce, AI automation, CRM systems, and digital infrastructure for Indian founders and D2C brands.",
+  "inLanguage": "en-IN",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Big Scoop Studio",
+    "url": "https://www.bigscoopstudio.com",
+    "logo": "https://www.bigscoopstudio.com/static/Logos/Big_Scoop_Studio_light_Logo.png"
+  }
+}
+</script>
+{% endblock meta %}
+
+{% block css %}
+<style>
+    .insights-page { padding: 7rem 0 5rem; background: var(--brand-light, #f7f3f0); }
+    .insights-hero { max-width: 840px; margin-bottom: 3rem; }
+    .insights-title { font-size: clamp(2.5rem, 5vw, 4.8rem); line-height: .95; margin-bottom: 1rem; }
+    .insights-copy { color: #666; font-size: 1.05rem; line-height: 1.8; }
+    .insights-layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 2rem; align-items: start; }
+    .category-panel { position: sticky; top: 96px; background: #fff; border: 1px solid rgba(46,46,46,.08); border-radius: 14px; padding: 1rem; }
+    .category-link { display: block; padding: .85rem 1rem; border-radius: 10px; color: #555; text-decoration: none; }
+    .category-link.active, .category-link:hover { background: rgba(111,143,159,.12); color: var(--brand-accent, #6F8F9F); }
+    .featured-article { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .7fr); gap: 1.5rem; background: #fff; border: 1px solid rgba(46,46,46,.08); border-radius: 16px; padding: 1rem; margin-bottom: 1.5rem; }
+    .article-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+    .article-card { background: #fff; border: 1px solid rgba(46,46,46,.08); border-radius: 14px; overflow: hidden; text-decoration: none; color: inherit; display: block; }
+    .article-thumb { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: #e9e3de; }
+    .article-body { padding: 1.25rem; }
+    .article-meta { color: var(--brand-accent, #6F8F9F); font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .65rem; }
+    .article-title { font-size: 1.25rem; margin-bottom: .65rem; }
+    .article-desc { color: #666; line-height: 1.65; margin: 0; }
+    @media (max-width: 991px) { .insights-layout, .featured-article { grid-template-columns: 1fr; } .category-panel { position: static; } }
+    @media (max-width: 767px) { .article-grid { grid-template-columns: 1fr; } }
+</style>
+{% endblock css %}
+
+{% block body %}
+<main class="insights-page">
+    <div class="container px-4 px-lg-5">
+        <section class="insights-hero">
+            <h1 class="insights-title font-heading">
+                {% if active_category %}{{ active_category.name }} Insights{% else %}Insights for sharper digital growth.{% endif %}
+            </h1>
+            <p class="insights-copy">Ideas, systems, and practical thinking from Big Scoop Studio across e-commerce, AI automation, CRM architecture, and growth engineering.</p>
+        </section>
+
+        <div class="insights-layout">
+            <aside class="category-panel">
+                <a class="category-link {% if not active_category %}active{% endif %}" href="{% url 'insights' %}">All Articles</a>
+                {% for category in categories %}
+                    <a class="category-link {% if active_category.id == category.id %}active{% endif %}" href="{% url 'insights_by_category' category.slug %}">{{ category.name }}</a>
+                {% endfor %}
+            </aside>
+
+            <section>
+                {% if featured_article %}
+                    <a href="{% url 'article_detail' featured_article.slug %}" style="text-decoration: none; color: #555;" class="featured-article">
+                        <div class="article-body">
+                            <div class="article-meta">{{ featured_article.category.name|default:"Insight" }} · {{ featured_article.created_at|date:"M d, Y" }}</div>
+                            <h2 class="font-heading">{{ featured_article.title }}</h2>
+                            <p class="article-desc">{{ featured_article.meta_description|default:featured_article.description|truncatechars:180 }}</p>
+                        </div>
+                        {% if featured_article.thumbnail_image %}
+                            <img class="article-thumb" src="{{ featured_article.thumbnail_image.url }}" alt="{{ featured_article.title }}">
+                        {% endif %}
+                    </a>
+                {% endif %}
+
+                <div class="article-grid">
+                    {% for article in articles %}
+                        <a href="{% url 'article_detail' article.slug %}" class="article-card">
+                            {% if article.thumbnail_image %}
+                                <img class="article-thumb" src="{{ article.thumbnail_image.url }}" alt="{{ article.title }}">
+                            {% else %}
+                                <div class="article-thumb"></div>
+                            {% endif %}
+                            <div class="article-body">
+                                <div class="article-meta">{{ article.category.name|default:"Insight" }} · {{ article.created_at|date:"M d, Y" }}</div>
+                                <h2 class="article-title font-heading">{{ article.title }}</h2>
+                                <p class="article-desc">{{ article.meta_description|default:article.description|truncatechars:130 }}</p>
+                            </div>
+                        </a>
+                    {% empty %}
+                        <p class="article-desc">No published articles yet.</p>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+{% endblock body %}
+
+{% block script %}{% endblock script %}

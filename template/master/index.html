@@ -1,0 +1,206 @@
+{% extends "master/base.html" %}
+{% block 'title' %}Welcome back to Big Scoop Studio{% endblock 'title' %}
+{% block 'css' %}
+<style>
+/* ================= DASHBOARD STYLES ================= */
+.dashboard-container {
+    padding: 2rem;
+}
+
+/* Cards */
+.ds-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid rgba(46, 46, 46, 0.08);
+    box-shadow: 0 2px 8px rgba(46, 46, 46, 0.04);
+    padding: 1.5rem;
+    transition: all 0.2s ease;
+}
+.ds-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(46, 46, 46, 0.06);
+}
+
+/* Headings */
+.ds-heading {
+    font-family: 'Plus Jakarta Sans';
+    font-weight: 600;
+    color: #2E2E2E;
+}
+
+/* Muted */
+.ds-muted {
+    color: #6b7280;
+    font-family: 'Inter';
+}
+
+/* Metric */
+.metric-value {
+    font-size: 1.75rem;
+    font-weight: 600;
+    font-family: 'Plus Jakarta Sans';
+    color: #2E2E2E;
+}
+
+/* Badge */
+.ds-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    background: rgba(111, 143, 159, 0.12);
+    color: #6F8F9F;
+}
+
+/* Table */
+.ds-table th {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+.ds-table td {
+    padding: 1rem 0.5rem;
+    border-bottom: 1px solid rgba(46,46,46,0.05);
+}
+</style>
+{% endblock 'css' %}
+{% block 'body' %}
+<div class="dashboard-container">
+
+    <!-- ===== METRICS ===== -->
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-3">
+            <div class="ds-card">
+                <div class="ds-muted">Total Revenue</div>
+                <div class="metric-value">₹2.48 Cr</div>
+                <div class="ds-muted mt-1">+18% this month</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="ds-card">
+                <div class="ds-muted">Active Projects</div>
+                <div class="metric-value">27</div>
+                <div class="ds-muted mt-1">6 new this week</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="ds-card">
+                <div class="ds-muted">Total Clients</div>
+                <div class="metric-value">14</div>
+                <div class="ds-muted mt-1">3 onboarded</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="ds-card">
+                <div class="ds-muted">Team Members</div>
+                <div class="metric-value">22</div>
+                <div class="ds-muted mt-1">Across 4 teams</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== PROJECTS ===== -->
+    <div class="row g-4">
+
+        <div class="col-lg-7">
+            <div class="ds-card">
+                <h6 class="ds-heading mb-4">Active Projects</h6>
+
+                <table class="table ds-table">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Status</th>
+                            <th>Deadline</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Aura E-Commerce System</td>
+                            <td><span class="ds-badge">Active</span></td>
+                            <td>18 May</td>
+                            <td>₹12.5L</td>
+                        </tr>
+                        <tr>
+                            <td>Nexus CRM Platform</td>
+                            <td><span class="ds-badge">In Progress</span></td>
+                            <td>25 May</td>
+                            <td>₹18L</td>
+                        </tr>
+                        <tr>
+                            <td>Vela Marketplace Automation</td>
+                            <td><span class="ds-badge">Review</span></td>
+                            <td>12 May</td>
+                            <td>₹9.8L</td>
+                        </tr>
+                        <tr>
+                            <td>Zenith Analytics Dashboard</td>
+                            <td><span class="ds-badge">Active</span></td>
+                            <td>30 May</td>
+                            <td>₹15L</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ===== TASKS ===== -->
+        <div class="col-lg-5">
+            <div class="ds-card">
+                <h6 class="ds-heading mb-4">Recent Tasks</h6>
+
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <div class="ds-heading">Optimize Product Listings</div>
+                            <div class="ds-muted">Assigned to Rahul</div>
+                        </div>
+                        <span class="ds-badge">High</span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <div class="ds-heading">CRM Lead Pipeline Setup</div>
+                            <div class="ds-muted">Assigned to Neha</div>
+                        </div>
+                        <span class="ds-badge">Medium</span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <div class="ds-heading">A+ Content Design</div>
+                            <div class="ds-muted">Assigned to Arjun</div>
+                        </div>
+                        <span class="ds-badge">Critical</span>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <div class="ds-heading">Marketplace Sync Automation</div>
+                            <div class="ds-muted">Assigned to Priya</div>
+                        </div>
+                        <span class="ds-badge">Low</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock 'body' %}
+{% block 'script' %}{% endblock 'script' %}

@@ -1,0 +1,187 @@
+{% extends "main/base.html" %}
+
+{% block title %}Privacy Policy | Big Scoop Studio{% endblock title %}
+
+{% block meta %}
+<meta name="description" content="Privacy Policy for Big Scoop Studio. Learn how we collect, use, and protect your data.">
+{% endblock meta %}
+
+{% block css %}
+<style>
+    .legal-page {
+        background-color: var(--brand-light, #f7f3f0);
+        padding-top: 8rem;
+        padding-bottom: 6rem;
+    }
+    .legal-container {
+        max-width: 860px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 4rem;
+        border-radius: var(--border-radius-soft, 12px);
+        box-shadow: var(--shadow-soft, 0 10px 40px rgba(46, 46, 46, 0.08));
+    }
+    .legal-title {
+        font-family: var(--font-heading, 'Montserrat', sans-serif);
+        color: var(--brand-dark, #2E2E2E);
+        font-weight: 800;
+        font-size: 2.5rem;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.5rem;
+    }
+    .legal-updated {
+        font-family: var(--font-body, 'Inter', sans-serif);
+        color: var(--brand-accent, #6F8F9F);
+        font-weight: 500;
+        font-size: 0.95rem;
+        margin-bottom: 3rem;
+        display: inline-block;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid rgba(111, 143, 159, 0.2);
+    }
+    .legal-section {
+        margin-bottom: 3rem;
+    }
+    .legal-section h2 {
+        font-family: var(--font-heading, 'Montserrat', sans-serif);
+        font-weight: 700;
+        font-size: 1.4rem;
+        color: var(--brand-dark, #2E2E2E);
+        margin-bottom: 1.2rem;
+    }
+    .legal-section p, .legal-section li {
+        font-family: var(--font-body, 'Inter', sans-serif);
+        color: #555555;
+        line-height: 1.8;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    .legal-section ul {
+        padding-left: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .legal-section li::marker {
+        color: var(--brand-accent, #6F8F9F);
+    }
+    .legal-section a {
+        color: var(--brand-accent, #6F8F9F);
+        text-decoration: none;
+        font-weight: 500;
+        transition: var(--transition-smooth, all 0.4s ease);
+    }
+    .legal-section a:hover {
+        color: var(--brand-dark, #2E2E2E);
+        text-decoration: underline;
+    }
+    
+    @media (max-width: 768px) {
+        .legal-container {
+            padding: 2rem;
+        }
+        .legal-title {
+            font-size: 2rem;
+        }
+    }
+</style>
+{% endblock css %}
+
+{% block body %}
+<section class="legal-page">
+    <div class="container">
+        <div class="legal-container">
+            <h1 class="legal-title">Privacy Policy</h1>
+            <span class="legal-updated">Last updated: May 24, 2026</span>
+
+            <section class="legal-section">
+                <h2>1. Introduction</h2>
+                <p>Welcome to Big Scoop Studio ("we," "our," or "us"). We respect your privacy and are committed to protecting your personal data. This Privacy Policy outlines how we collect, use, and safeguard your information when you visit our website, use our services, or engage with us. By using our website, you consent to the data practices described in this policy.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>2. Information We Collect</h2>
+                <p>We may collect personal identification information from Users in a variety of ways, including, but not limited to, when Users visit our site, fill out a form, subscribe to the newsletter, and in connection with other activities, services, features, or resources we make available. Information collected may include your name, email address, phone number, company name, and project details.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>3. Lead Forms and Enquiry Forms</h2>
+                <p>When you submit a "Get Proposal" or "Book a Call" form, we collect the information you provide (such as your name, contact details, and project context) to evaluate your requirements and communicate with you regarding our digital agency services. This data is stored securely and is strictly used for business communication and project assessment.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>4. Newsletter Subscriptions</h2>
+                <p>If you choose to opt-in to our mailing list, you will receive emails that may include company news, updates, related product or service information, and insights. We collect your email address for this purpose. You can unsubscribe at any time using the link provided in our emails.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>5. Information Collected Through Ads (Meta & Google)</h2>
+                <p>We utilize advertising platforms, including Meta Ads and Google Ads, to promote our services. These platforms may use tags, pixels, and similar technologies to collect information about your interactions with our website and advertisements. This helps us measure ad performance, optimize campaigns, and deliver relevant content. We do not sell your personal data to these third parties.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>6. Cookies and Tracking Technologies</h2>
+                <p>Our website uses "cookies" to enhance User experience. Your web browser places cookies on your hard drive for record-keeping purposes and sometimes to track information about you. You may choose to set your web browser to refuse cookies or to alert you when cookies are being sent. If you do so, note that some parts of the site may not function properly.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>7. How We Use Collected Information</h2>
+                <p>Big Scoop Studio may collect and use your personal information for the following purposes:</p>
+                <ul>
+                    <li>To respond to your customer service requests and support needs efficiently.</li>
+                    <li>To personalize user experience and understand how our Users as a group use the services and resources provided on our site.</li>
+                    <li>To improve our website, offerings, and digital services.</li>
+                    <li>To send periodic emails regarding your order, project, or relevant company updates.</li>
+                </ul>
+            </section>
+
+            <section class="legal-section">
+                <h2>8. How We Share Information</h2>
+                <p>We do not sell, trade, or rent Users' personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information regarding visitors and users with our business partners, trusted affiliates, and advertisers. We may use third-party service providers to help us operate our business, such as sending out newsletters or surveys, provided that you have given us your permission.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>9. Data Retention</h2>
+                <p>We will retain your personal information only for as long as is necessary for the purposes set out in this Privacy Policy, and to the extent necessary to comply with our legal obligations, resolve disputes, and enforce our legal agreements and policies.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>10. Data Security</h2>
+                <p>We adopt appropriate data collection, storage, and processing practices and security measures to protect against unauthorized access, alteration, disclosure, or destruction of your personal information, username, password, transaction information, and data stored on our site.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>11. User Rights and Choices</h2>
+                <p>Depending on your location, you may have the right to request access to, correction of, or deletion of your personal data. If you wish to exercise any of these rights, please contact us using the information provided below. We will respond to your request in accordance with applicable laws.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>12. Opting Out of Marketing Emails</h2>
+                <p>You may opt out of receiving promotional emails from us by following the instructions in those emails or by contacting us directly at ceo@bigscoopstudio.com. If you opt out, we may still send you non-promotional emails, such as those about your account or our ongoing business relations.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>13. Third-Party Tools and Services</h2>
+                <p>Users may find advertising or other content on our site that links to the sites and services of our partners, suppliers, advertisers, sponsors, licensors, and other third parties. We do not control the content or links that appear on these sites and are not responsible for the practices employed by websites linked to or from our site.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>14. Children’s Privacy</h2>
+                <p>Our website and services are not directed to individuals under the age of 18. We do not knowingly collect personal information from children. If we become aware that a child has provided us with personal data, we will take steps to delete such information.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>15. Updates to the Policy</h2>
+                <p>Big Scoop Studio has the discretion to update this privacy policy at any time. When we do, we will revise the updated date at the top of this page. We encourage Users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>16. Contact Information</h2>
+                <p>If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us at:</p>
+                <ul>
+                    <li><strong>Email:</strong> <a href="mailto:ceo@bigscoopstudio.com">ceo@bigscoopstudio.com</a></li>
+                    <li><strong>Phone:</strong> <a href="tel:+919789091524">9789091524</a></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</section>
+{% endblock body %}

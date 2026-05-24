@@ -1,0 +1,217 @@
+{% extends "master/base.html" %}
+{% block 'title' %}Team{% endblock %}
+
+{% block 'body' %}
+
+<style>
+.page-container { padding: 2rem; }
+
+/* Tile */
+.user-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid rgba(46,46,46,0.08);
+    box-shadow: 0 2px 8px rgba(46,46,46,0.04);
+    padding: 1.5rem;
+    text-align: center;
+    transition: 0.2s;
+}
+.user-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(46,46,46,0.06);
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-fallback {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(111,143,159,0.12);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
+    color:#6F8F9F;
+    margin:auto;
+}
+
+.role-badge {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(111,143,159,0.12);
+    color:#6F8F9F;
+}
+</style>
+
+<div class="page-container">
+
+    <!-- ACTION BUTTONS -->
+    <div class="d-flex gap-2 mb-4">
+        <button class="btn btn-primary" onclick="openCreate('staff')" style="background-color: #6F8F9F; border: solid #6F8F9F;">Add Staff</button>
+        <button class="btn btn-outline-dark" onclick="openCreate('manager')">Add Manager</button>
+        <button class="btn btn-outline-dark" onclick="openCreate('master')">Add Super Admin</button>
+    </div>
+
+    <!-- USERS GRID -->
+    <div class="row g-4">
+
+        {% for user in users %}
+        <div class="col-md-3">
+
+            <div class="user-card">
+
+                {% if user.profile_image %}
+                    <img src="{{ user.profile_image.url }}" class="avatar">
+                {% else %}
+                    <div class="avatar-fallback">
+                        {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
+                    </div>
+                {% endif %}
+
+                <h6 class="mt-3 mb-1">
+                    {{ user.first_name }} {{ user.last_name }}
+                </h6>
+
+                <div class="text-muted small mb-2">
+                    {{ user.role_title }}
+                </div>
+
+                <span class="role-badge">{{ user.role|title }}</span>
+
+                <div class="mt-3 d-flex justify-content-center gap-2">
+                    <button class="btn btn-sm btn-light"
+                        onclick="openEdit(
+                            '{{ user.id }}',
+                            '{{ user.first_name }}',
+                            '{{ user.last_name }}',
+                            '{{ user.username }}',
+                            '{{ user.email }}',
+                            '{{ user.phone }}',
+                            '{{ user.role_title }}',
+                            '{{ user.description|escapejs }}',
+                            '{{ user.role }}'
+                        )">
+                        Edit
+                    </button>
+
+                    <a href="/master/reset-password/{{ user.id }}/" class="btn btn-sm btn-light">
+                        Reset
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal fade" id="userModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content p-4">
+
+            <form method="POST" action="/add_user" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <input type="hidden" name="user_id" id="user_id">
+                <input type="hidden" name="role" id="role_field">
+
+                <h5 class="mb-3">User Setup</h5>
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label>First Name</label>
+                        <input type="text" name="first_name" id="first_name" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Last Name</label>
+                        <input type="text" name="last_name" id="last_name" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Username</label>
+                        <input type="text" name="username" id="username" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Email</label>
+                        <input type="email" name="email" id="email" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Phone</label>
+                        <input type="text" name="phone" id="phone" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Designation</label>
+                        <input type="text" name="role_title" id="role_title" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Profile Image</label>
+                        <input type="file" name="profile_image" class="form-control">
+                    </div>
+
+                    <div class="col-12">
+                        <label>Description</label>
+                        <textarea name="description" id="description" class="form-control"></textarea>
+                    </div>
+
+                </div>
+
+                <div class="d-flex justify-content-end mt-3 gap-2">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary">Save</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+function openCreate(role) {
+    document.getElementById('user_id').value = '';
+    document.querySelector('form').reset();
+    document.getElementById('role_field').value = role;
+
+    new bootstrap.Modal(document.getElementById('userModal')).show();
+}
+
+function openEdit(id, fname, lname, username, email, phone, role_title, description, role) {
+
+    document.getElementById('user_id').value = id;
+    document.getElementById('first_name').value = fname;
+    document.getElementById('last_name').value = lname;
+    document.getElementById('username').value = username;
+    document.getElementById('email').value = email;
+    document.getElementById('phone').value = phone;
+    document.getElementById('role_title').value = role_title;
+    document.getElementById('description').value = description;
+    document.getElementById('role_field').value = role;
+
+    new bootstrap.Modal(document.getElementById('userModal')).show();
+}
+</script>
+
+{% endblock %}

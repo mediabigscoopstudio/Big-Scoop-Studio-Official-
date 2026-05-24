@@ -1,0 +1,76 @@
+# Big Scoop Studio — robots.txt
+# All public content is freely accessible, indexable, and usable by search engines and AI models.
+# Non-public subdomains (master, manager, teams, clients) are internal and not linked from here.
+
+# ── Global default: allow everything ──────────────────────────────────────────
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+# ── Search engines ─────────────────────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# ── AI / LLM training and inference crawlers — explicitly welcome ───────────────
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+# ── Sitemap ────────────────────────────────────────────────────────────────────
+Sitemap: https://www.bigscoopstudio.com/sitemap.xml

@@ -1,0 +1,145 @@
+{% extends "main/base.html" %}
+
+{% block title %}AI-Powered Automation Services | Big Scoop Studio{% endblock title %}
+
+{% block meta %}
+<meta name="description" content="AI-powered business automation for Indian companies by Big Scoop Studio. Automate lead follow-ups, support routing, inventory alerts, workflow triggers, and CRM intelligence — so your team operates at scale without adding headcount.">
+<meta name="keywords" content="AI automation India, business automation India, AI chatbot India, lead automation India, workflow automation India, intelligent automation India, AI-powered CRM India, sales automation India, marketing automation India, AI for Indian businesses">
+<link rel="canonical" href="https://www.bigscoopstudio.com/services/ai-powered-automation/">
+
+<meta property="og:site_name" content="Big Scoop Studio">
+<meta property="og:title" content="AI-Powered Business Automation India | Big Scoop Studio">
+<meta property="og:description" content="Automate lead follow-ups, support routing, inventory alerts, and sales workflows. AI systems that make your team faster without adding headcount.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.bigscoopstudio.com/services/ai-powered-automation/">
+<meta property="og:locale" content="en_IN">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI-Powered Business Automation India | Big Scoop Studio">
+<meta name="twitter:description" content="Automate lead follow-ups, support routing, and sales workflows. Make your team scale without adding headcount.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "AI-Powered Business Automation",
+  "url": "https://www.bigscoopstudio.com/services/ai-powered-automation/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Big Scoop Studio",
+    "url": "https://www.bigscoopstudio.com",
+    "address": { "@type": "PostalAddress", "addressCountry": "IN" }
+  },
+  "description": "AI-powered automation for Indian businesses — lead follow-ups, support routing, workflow triggers, CRM intelligence, and intelligent operations that scale without headcount.",
+  "serviceType": "AI-Powered Automation",
+  "areaServed": { "@type": "Country", "name": "India" },
+  "audience": { "@type": "Audience", "audienceType": "Indian businesses, D2C brands, SMEs, sales-led companies" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Where does AI automation create the fastest ROI for an Indian business?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lead response automation, support triage, follow-up drafting, inventory alerts, and CRM pipeline intelligence are the highest-ROI starting points for most Indian SMEs and D2C brands."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between AI automation and basic workflow automation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Basic workflow automation follows fixed if-then rules. AI automation uses models to classify, route, generate, and prioritise — handling unstructured inputs like customer messages, support tickets, or lead context that rule-based tools cannot process."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a small Indian business afford AI automation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Big Scoop Studio builds targeted automation connected to your actual CRM, inventory, and communication systems — scoped to the highest-value workflows first. The goal is measurable ROI, not a technology showcase."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does Big Scoop Studio connect AI to existing business systems?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We build AI automation as part of the operating layer — integrated with your CRM, WhatsApp/email, e-commerce backend, and internal workflows — not as a standalone chatbot that lives outside your business logic."
+      }
+    }
+  ]
+}
+</script>
+{% endblock meta %}
+
+{% block css %}
+<style>
+    .service-page { padding: 7rem 0 5rem; background: var(--brand-light, #f7f3f0); }
+    .service-hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr); gap: 3rem; align-items: center; }
+    .service-kicker { color: var(--brand-accent, #6F8F9F); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; }
+    .service-title { font-size: clamp(2.4rem, 5vw, 4.8rem); line-height: .95; margin: 1rem 0; }
+    .service-copy { color: #555; font-size: 1.08rem; line-height: 1.8; max-width: 680px; }
+    .service-points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+    .service-point, .service-form { background: #fff; border: 1px solid rgba(46,46,46,.08); border-radius: 14px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(46,46,46,.05); }
+    .service-point h3 { font-size: 1rem; margin-bottom: .5rem; }
+    .service-point p { color: #666; margin: 0; font-size: .92rem; line-height: 1.6; }
+    .service-form h2 { font-size: 1.35rem; margin-bottom: .5rem; }
+    .service-form p { color: #666; font-size: .92rem; line-height: 1.6; }
+    .service-form .form-control { border-radius: 10px; padding: .85rem 1rem; }
+    .service-form textarea { min-height: 120px; }
+    @media (max-width: 991px) { .service-hero, .service-points { grid-template-columns: 1fr; } }
+</style>
+{% endblock css %}
+
+{% block body %}
+<main class="service-page">
+    <div class="container px-4 px-lg-5">
+        <section class="service-hero">
+            <div>
+                <div class="service-kicker">AI-Powered Automation</div>
+                <h1 class="service-title font-heading">Your business should work while you sleep.</h1>
+                <p class="service-copy">
+                    We wire intelligence into your workflows: chatbots, smart recommendations, automated follow-ups, lead routing, and internal systems that cut manual effort while creating more revenue on autopilot.
+                </p>
+
+                <div class="service-points">
+                    <div class="service-point">
+                        <h3 class="font-heading">Smart Follow-Ups</h3>
+                        <p>Automated nurturing that keeps prospects moving without manual chasing.</p>
+                    </div>
+                    <div class="service-point">
+                        <h3 class="font-heading">AI Assistants</h3>
+                        <p>Chatbots and internal assistants trained around your real business process.</p>
+                    </div>
+                    <div class="service-point">
+                        <h3 class="font-heading">Workflow Intelligence</h3>
+                        <p>Connect tools, reduce repetitive work, and surface the next best action.</p>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="service-form">
+                <h2 class="font-heading">Automate My Business</h2>
+                <p>Tell us where your team loses time. We will map where AI can create leverage.</p>
+                <form method="POST" action="{% url 'service_page_lead' 'ai-powered-automation' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="source" value="website">
+                    <div class="mb-3"><input class="form-control" type="text" name="name" placeholder="Your name" required></div>
+                    <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email address" required></div>
+                    <div class="mb-3"><input class="form-control" type="tel" name="contact_number" placeholder="Phone number" required></div>
+                    <div class="mb-4"><textarea class="form-control" name="context" placeholder="What should AI automate for you? Leads, support, sales, operations, reports?"></textarea></div>
+                    <button class="btn-agency-primary w-100 py-3" type="submit">Request Automation Strategy</button>
+                </form>
+            </aside>
+        </section>
+    </div>
+</main>
+{% endblock body %}
+
+{% block script %}{% endblock script %}

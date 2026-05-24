@@ -1,0 +1,191 @@
+{% extends "main/base.html" %}
+
+{% block title %}Terms & Conditions | Big Scoop Studio{% endblock title %}
+
+{% block meta %}
+<meta name="description" content="Terms and Conditions for Big Scoop Studio. Read our operational guidelines, service agreements, and client responsibilities.">
+{% endblock meta %}
+
+{% block css %}
+<style>
+    .legal-page {
+        background-color: var(--brand-light, #f7f3f0);
+        padding-top: 8rem;
+        padding-bottom: 6rem;
+    }
+    .legal-container {
+        max-width: 860px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 4rem;
+        border-radius: var(--border-radius-soft, 12px);
+        box-shadow: var(--shadow-soft, 0 10px 40px rgba(46, 46, 46, 0.08));
+    }
+    .legal-title {
+        font-family: var(--font-heading, 'Montserrat', sans-serif);
+        color: var(--brand-dark, #2E2E2E);
+        font-weight: 800;
+        font-size: 2.5rem;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.5rem;
+    }
+    .legal-updated {
+        font-family: var(--font-body, 'Inter', sans-serif);
+        color: var(--brand-accent, #6F8F9F);
+        font-weight: 500;
+        font-size: 0.95rem;
+        margin-bottom: 3rem;
+        display: inline-block;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid rgba(111, 143, 159, 0.2);
+    }
+    .legal-section {
+        margin-bottom: 3rem;
+    }
+    .legal-section h2 {
+        font-family: var(--font-heading, 'Montserrat', sans-serif);
+        font-weight: 700;
+        font-size: 1.4rem;
+        color: var(--brand-dark, #2E2E2E);
+        margin-bottom: 1.2rem;
+    }
+    .legal-section p, .legal-section li {
+        font-family: var(--font-body, 'Inter', sans-serif);
+        color: #555555;
+        line-height: 1.8;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    .legal-section ul {
+        padding-left: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .legal-section li::marker {
+        color: var(--brand-accent, #6F8F9F);
+    }
+    .legal-section a {
+        color: var(--brand-accent, #6F8F9F);
+        text-decoration: none;
+        font-weight: 500;
+        transition: var(--transition-smooth, all 0.4s ease);
+    }
+    .legal-section a:hover {
+        color: var(--brand-dark, #2E2E2E);
+        text-decoration: underline;
+    }
+    
+    @media (max-width: 768px) {
+        .legal-container {
+            padding: 2rem;
+        }
+        .legal-title {
+            font-size: 2rem;
+        }
+    }
+</style>
+{% endblock css %}
+
+{% block body %}
+<section class="legal-page">
+    <div class="container">
+        <div class="legal-container">
+            <h1 class="legal-title">Terms & Conditions</h1>
+            <span class="legal-updated">Last updated: May 24, 2026</span>
+
+            <section class="legal-section">
+                <h2>1. Introduction</h2>
+                <p>These Terms and Conditions govern your use of the Big Scoop Studio website and the services provided by our agency. By accessing our website, engaging our services, or submitting a project enquiry, you agree to be bound by these terms in full. If you disagree with any part of these terms, please do not use our website or services.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>2. Use of the Website</h2>
+                <p>You may view, download, and print content from the website for your own personal and business assessment purposes, subject to the restrictions set out below and elsewhere in these terms. You must not use our website in any way that causes, or may cause, damage to the website or impairment of the availability or accessibility of the site.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>3. Services Offered</h2>
+                <p>Big Scoop Studio provides digital agency services including, but not limited to, E-Commerce development, custom web development, app development, UI/UX design, digital strategy, marketing, advertising support, and website maintenance. The specific scope of services for any client will be outlined in a formal project proposal or Master Services Agreement.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>4. Client Responsibilities</h2>
+                <p>To ensure the successful delivery of our services, clients are expected to provide clear communication, prompt feedback, and necessary access to digital assets (such as hosting credentials, branding materials, and content) in a timely manner. Delays in client feedback or asset delivery may result in adjusted project timelines.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>5. Project Proposals and Scope</h2>
+                <p>All projects commence based on a mutually agreed proposal or statement of work. This document defines the exact scope, deliverables, and features. Any requests that fall outside of the approved scope will be treated as "Scope Creep" and may be subject to additional estimates, billing, and timeline revisions.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>6. Payments, Invoices, and Taxes</h2>
+                <p>Payment terms, including upfront deposits and milestone payments, will be clearly outlined in your project proposal. Work will commence only upon receipt of the agreed initial deposit. Invoices are payable within the timeframe specified on the invoice. All fees are exclusive of applicable taxes (such as GST in India), which will be applied to the final invoice as required by law.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>7. Revisions and Approvals</h2>
+                <p>We structure our projects with built-in revision cycles at key milestones (e.g., design approval, development staging). The number of included revisions will be stated in your proposal. Additional revisions requested after the final sign-off of a milestone may incur extra hourly or fixed charges.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>8. Timelines and Delays</h2>
+                <p>We strive to meet all estimated project timelines. However, timelines are projections based on the assumption of prompt client feedback and smooth technical integrations. Big Scoop Studio is not liable for project delays caused by late client responses, third-party API outages, or circumstances beyond our reasonable control.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>9. Intellectual Property</h2>
+                <p>Upon receipt of full and final payment for a project, the intellectual property rights for the custom design and code produced specifically for your business will be transferred to you. Big Scoop Studio retains the right to reuse open-source code, generic libraries, and foundational frameworks used across multiple projects.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>10. Portfolio and Marketing Usage</h2>
+                <p>Unless a Non-Disclosure Agreement (NDA) is explicitly signed before the project begins, Big Scoop Studio reserves the right to showcase the completed project, design assets, and case studies in our digital portfolio, social media, and marketing materials to demonstrate our expertise.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>11. Third-Party Services, Hosting, Domains, and APIs</h2>
+                <p>Our solutions may rely on third-party tools, plugins, APIs, hosting providers, or software platforms (e.g., Shopify, AWS, payment gateways). Big Scoop Studio is not responsible for the performance, downtime, pricing changes, or policy updates of these third-party services. Clients are responsible for maintaining their own domain and hosting renewals unless a maintenance contract is active.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>12. Limitation of Liability</h2>
+                <p>In no event shall Big Scoop Studio, nor any of its officers, directors, or employees, be held liable for any indirect, consequential, or special liability arising out of or in any way related to your use of this website or our services, including loss of revenue, data, or business disruption.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>13. No Guarantee of Specific Business Results</h2>
+                <p>While we apply industry best practices to our UI/UX, development, and marketing strategies, Big Scoop Studio cannot guarantee specific business outcomes, sales volumes, or ROI. Digital landscapes are subject to market conditions, algorithms, and consumer behavior beyond our control.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>14. Confidentiality</h2>
+                <p>We treat all client business information, proprietary concepts, and unreleased project details as confidential. We will not disclose your sensitive operational data to unauthorized third parties without your prior consent.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>15. Termination of Services</h2>
+                <p>Either party may terminate a project agreement with written notice if the other party breaches the terms materially. In the event of client-initiated termination before project completion, Big Scoop Studio will retain the initial deposit and invoice for any unbilled work completed up to the date of termination.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>16. Governing Law and Disputes</h2>
+                <p>These Terms shall be governed by and construed in accordance with the laws of [Insert Jurisdiction/State, India]. Any disputes relating to these terms and conditions will be subject to the exclusive jurisdiction of the courts of [Insert Jurisdiction/State, India].</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>17. Changes to Terms</h2>
+                <p>Big Scoop Studio reserves the right to revise these terms at any time. By using this website and our services, you are expected to review these terms on a regular basis to ensure you understand all terms and conditions governing our relationship.</p>
+            </section>
+
+            <section class="legal-section">
+                <h2>18. Contact Information</h2>
+                <p>If you have any questions or require further clarification regarding these Terms and Conditions, please contact us:</p>
+                <ul>
+                    <li><strong>Email:</strong> <a href="mailto:ceo@bigscoopstudio.com">ceo@bigscoopstudio.com</a></li>
+                    <li><strong>Phone:</strong> <a href="tel:+919789091524">9789091524</a></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</section>
+{% endblock body %}

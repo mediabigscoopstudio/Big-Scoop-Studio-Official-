@@ -1,0 +1,145 @@
+{% extends "main/base.html" %}
+
+{% block title %}Custom CRM Development Company | Big Scoop Studio{% endblock title %}
+
+{% block meta %}
+<meta name="description" content="Custom CRM development for Indian businesses by Big Scoop Studio. Build a CRM designed around how your sales team actually works — not how a Western enterprise product thinks they should. Higher adoption, cleaner pipeline, better revenue visibility.">
+<meta name="keywords" content="custom CRM development India, CRM software India, sales CRM India, CRM for Indian SMEs, custom sales CRM India, CRM development agency India, Indian CRM solution, sector-specific CRM India, CRM adoption India, sales pipeline India">
+<link rel="canonical" href="https://www.bigscoopstudio.com/services/custom-crm-development/">
+
+<meta property="og:site_name" content="Big Scoop Studio">
+<meta property="og:title" content="Custom CRM Development India | Big Scoop Studio">
+<meta property="og:description" content="A CRM built around how your Indian sales team actually works. Higher adoption, cleaner data, and real revenue visibility — not a generic enterprise tool nobody uses.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.bigscoopstudio.com/services/custom-crm-development/">
+<meta property="og:locale" content="en_IN">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Custom CRM Development India | Big Scoop Studio">
+<meta name="twitter:description" content="A CRM built for how Indian sales teams actually work. Higher adoption, cleaner pipeline, real revenue visibility.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Custom CRM Development",
+  "url": "https://www.bigscoopstudio.com/services/custom-crm-development/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Big Scoop Studio",
+    "url": "https://www.bigscoopstudio.com",
+    "address": { "@type": "PostalAddress", "addressCountry": "IN" }
+  },
+  "description": "Custom CRM development for Indian businesses. We design CRMs around your pipeline, team workflow, sales process, sector, and reporting needs — not generic templates.",
+  "serviceType": "Custom CRM Development",
+  "areaServed": { "@type": "Country", "name": "India" },
+  "audience": { "@type": "Audience", "audienceType": "Indian sales teams, SMEs, D2C brands, service businesses" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why do Indian sales teams struggle to adopt enterprise CRMs like Salesforce or HubSpot?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Enterprise CRMs were built for Western sales workflows, deal sizes, and team structures. Indian SME sales teams often work differently — field-heavy, relationship-driven, with different follow-up cadences. A CRM that doesn't reflect their reality gets abandoned within months."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What makes a custom CRM better than a generic CRM for an Indian business?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A custom CRM is designed around your actual pipeline stages, follow-up logic, sector terminology, reporting needs, and team behaviour. Adoption is dramatically higher because the system matches how the team already works — it doesn't ask them to change their behaviour to fit software."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to build a custom CRM?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A focused custom CRM for an Indian SME — covering lead management, pipeline tracking, follow-up automation, and reporting — typically takes 6 to 12 weeks from discovery to deployment, depending on integration complexity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Big Scoop Studio integrate the CRM with WhatsApp, email, and existing tools?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We build CRMs that connect to WhatsApp Business API, email, your e-commerce backend, accounting systems, and any other tools your team relies on — so the CRM becomes the single source of truth for your sales operation."
+      }
+    }
+  ]
+}
+</script>
+{% endblock meta %}
+
+{% block css %}
+<style>
+    .service-page { padding: 7rem 0 5rem; background: var(--brand-light, #f7f3f0); }
+    .service-hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr); gap: 3rem; align-items: center; }
+    .service-kicker { color: var(--brand-accent, #6F8F9F); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; }
+    .service-title { font-size: clamp(2.4rem, 5vw, 4.8rem); line-height: .95; margin: 1rem 0; }
+    .service-copy { color: #555; font-size: 1.08rem; line-height: 1.8; max-width: 680px; }
+    .service-points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+    .service-point, .service-form { background: #fff; border: 1px solid rgba(46,46,46,.08); border-radius: 14px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(46,46,46,.05); }
+    .service-point h3 { font-size: 1rem; margin-bottom: .5rem; }
+    .service-point p { color: #666; margin: 0; font-size: .92rem; line-height: 1.6; }
+    .service-form h2 { font-size: 1.35rem; margin-bottom: .5rem; }
+    .service-form p { color: #666; font-size: .92rem; line-height: 1.6; }
+    .service-form .form-control { border-radius: 10px; padding: .85rem 1rem; }
+    .service-form textarea { min-height: 120px; }
+    @media (max-width: 991px) { .service-hero, .service-points { grid-template-columns: 1fr; } }
+</style>
+{% endblock css %}
+
+{% block body %}
+<main class="service-page">
+    <div class="container px-4 px-lg-5">
+        <section class="service-hero">
+            <div>
+                <div class="service-kicker">Custom CRM Development</div>
+                <h1 class="service-title font-heading">A CRM built around your pipeline, not someone else’s.</h1>
+                <p class="service-copy">
+                    Off-the-shelf CRMs are built for everyone, which means they are perfect for no one. We build yours around your pipeline, your team, and your sector so deals stop falling through the cracks.
+                </p>
+
+                <div class="service-points">
+                    <div class="service-point">
+                        <h3 class="font-heading">Pipeline Fit</h3>
+                        <p>Stages, fields, automations, and reporting that match how your team sells.</p>
+                    </div>
+                    <div class="service-point">
+                        <h3 class="font-heading">Team Adoption</h3>
+                        <p>Interfaces that feel natural, so the CRM becomes useful instead of ignored.</p>
+                    </div>
+                    <div class="service-point">
+                        <h3 class="font-heading">Sector Logic</h3>
+                        <p>Built-in workflows for your industry, not generic dashboard furniture.</p>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="service-form">
+                <h2 class="font-heading">Design My CRM</h2>
+                <p>Share how your sales process works. We will review the best CRM architecture for you.</p>
+                <form method="POST" action="{% url 'service_page_lead' 'custom-crm-development' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="source" value="website">
+                    <div class="mb-3"><input class="form-control" type="text" name="name" placeholder="Your name" required></div>
+                    <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email address" required></div>
+                    <div class="mb-3"><input class="form-control" type="tel" name="contact_number" placeholder="Phone number" required></div>
+                    <div class="mb-4"><textarea class="form-control" name="context" placeholder="Tell us about your pipeline, team, current CRM, or reporting needs."></textarea></div>
+                    <button class="btn-agency-primary w-100 py-3" type="submit">Request CRM Strategy</button>
+                </form>
+            </aside>
+        </section>
+    </div>
+</main>
+{% endblock body %}
+
+{% block script %}{% endblock script %}

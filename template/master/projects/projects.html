@@ -1,0 +1,946 @@
+{% extends "master/base.html" %}
+{% block 'title' %}Projects{% endblock %}
+
+{% block 'css' %}
+<style>
+/* ================= GLOBAL / THEME VARIABLES ================= */
+:root {
+    --bg-base: #f7f3f0;
+    --surface: #ffffff;
+    --accent: #6F8F9F;
+    --accent-light: rgba(111, 143, 159, 0.12);
+    --text-primary: #2E2E2E;
+    --text-muted: #6b7280;
+    --border-soft: rgba(46, 46, 46, 0.08);
+    --shadow-sm: 0 2px 8px rgba(46, 46, 46, 0.04);
+    --shadow-md: 0 8px 24px rgba(46, 46, 46, 0.06);
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --font-heading: 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+/* ================= PAGE CONTAINER ================= */
+.page-container {
+    padding: 2.5rem;
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    background-color: var(--bg-base);
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, .card-title {
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    font-weight: 600;
+}
+
+/* ================= HEADER ================= */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2.5rem;
+}
+
+.page-title {
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.page-subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.btn-primary-custom {
+    background-color: var(--text-primary);
+    color: var(--surface);
+    border: 1px solid var(--text-primary);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary-custom:hover {
+    background-color: #1a1a1a;
+    color: var(--surface);
+    transform: translateY(-1px);
+}
+
+.btn-light-custom {
+    background-color: var(--surface);
+    color: var(--text-primary);
+    border: 1px solid rgba(46, 46, 46, 0.15);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.btn-light-custom:hover {
+    background-color: var(--bg-base);
+    border-color: rgba(46, 46, 46, 0.25);
+}
+
+/* ================= STAT CARDS ================= */
+.stat-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-soft);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    height: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stat-value {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* ================= SECTION TITLES ================= */
+.section-title {
+    font-size: 1.25rem;
+    margin: 3rem 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.section-badge {
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+}
+
+/* ================= PROJECT CARDS (ACTIVE) ================= */
+.project-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-soft);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+}
+
+.project-brand {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.project-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid var(--border-soft);
+    background: var(--bg-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+.project-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.15rem;
+}
+
+.project-client {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.status-badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.status-planning { background: rgba(245, 158, 11, 0.1); color: #d97706; }
+.status-active { background: var(--accent-light); color: var(--accent); }
+.status-on-hold { background: rgba(239, 68, 68, 0.1); color: #dc2626; }
+.status-completed { background: rgba(16, 185, 129, 0.1); color: #059669; }
+
+.project-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.project-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #faf9f8;
+    border-radius: 8px;
+    border: 1px solid var(--border-soft);
+}
+
+.meta-item .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.05em;
+}
+
+.meta-item .value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.project-progress {
+    margin-bottom: 1.5rem;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.progress-track {
+    height: 6px;
+    background: var(--border-soft);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--text-primary);
+    border-radius: 10px;
+}
+
+.project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-soft);
+}
+
+.avatar-group {
+    display: flex;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--surface);
+    background: var(--accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: -8px;
+}
+
+.avatar:first-child { margin-left: 0; }
+
+.project-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* ================= COMPLETED PROJECTS (COMPACT) ================= */
+.project-card-compact {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-soft);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    opacity: 0.85;
+}
+
+.project-card-compact:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.compact-info {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.compact-meta {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.meta-stat {
+    text-align: right;
+}
+
+.meta-stat .label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.meta-stat .value {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+/* ================= PREMIUM MODAL ================= */
+.premium-modal .modal-content {
+    border: none;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+    background-color: var(--surface);
+    font-family: var(--font-body);
+}
+
+/* Header */
+.premium-modal .modal-header {
+    border-bottom: 1px solid var(--border-soft);
+    padding: 1.5rem 2rem;
+    background-color: var(--surface);
+    border-top-left-radius: var(--radius-lg);
+    border-top-right-radius: var(--radius-lg);
+    align-items: center;
+}
+
+.premium-modal .modal-title {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.premium-modal .modal-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+}
+
+.premium-modal .btn-close {
+    opacity: 0.4;
+    transition: opacity 0.2s ease;
+}
+
+.premium-modal .btn-close:hover { opacity: 1; }
+.premium-modal .btn-close:focus { box-shadow: none; }
+
+/* Body & Scrolling */
+.premium-modal .modal-body {
+    padding: 2rem;
+    background-color: #faf9f8;
+}
+
+.premium-modal .modal-body::-webkit-scrollbar { width: 6px; }
+.premium-modal .modal-body::-webkit-scrollbar-track { background: transparent; }
+.premium-modal .modal-body::-webkit-scrollbar-thumb {
+    background-color: rgba(46, 46, 46, 0.15);
+    border-radius: 10px;
+}
+
+/* Form Sections */
+.premium-modal .form-section {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 2px rgba(46, 46, 46, 0.02);
+}
+
+.premium-modal .form-section:last-child { margin-bottom: 0; }
+
+.premium-modal .section-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+}
+
+.premium-modal .section-subtitle {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Inputs */
+.premium-modal .form-label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+}
+
+.premium-modal .form-control, .premium-modal .form-select {
+    border-radius: 8px;
+    border: 1px solid rgba(46, 46, 46, 0.12);
+    padding: 0.65rem 1rem;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    box-shadow: none !important;
+}
+
+.premium-modal .form-control::placeholder { color: #9ca3af; }
+
+.premium-modal .form-control:focus, .premium-modal .form-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(111, 143, 159, 0.15) !important;
+}
+
+.premium-modal textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.premium-modal input[type="color"].form-control {
+    padding: 0.3rem;
+    height: 42px;
+    cursor: pointer;
+}
+
+/* Footer */
+.premium-modal .modal-footer {
+    border-top: 1px solid var(--border-soft);
+    padding: 1.25rem 2rem;
+    background-color: var(--surface);
+    border-bottom-left-radius: var(--radius-lg);
+    border-bottom-right-radius: var(--radius-lg);
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+</style>
+{% endblock 'css' %}
+
+{% block 'body' %}
+<div class="page-container">
+
+    <!-- ================= HEADER ================= -->
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Projects</h1>
+            <p class="page-subtitle">Manage client deliverables, operational timelines, and active deployments.</p>
+        </div>
+        <button class="btn-primary-custom" onclick="openProjectModal()">
+            <i class="ph ph-plus"></i>
+            Create Project
+        </button>
+    </div>
+
+    <!-- ================= STAT CARDS ================= -->
+    <div class="row g-4 mb-5">
+
+    <div class="col-12 col-sm-6 col-xl-3">
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Total Projects
+            </div>
+
+            <div class="stat-value">
+                {{ total_projects }}
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-3">
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Active Deployments
+            </div>
+
+            <div class="stat-value">
+                {{ active_count }}
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-3">
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Completed Archives
+            </div>
+
+            <div class="stat-value">
+                {{ completed_count }}
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-3">
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Total Pipeline (₹)
+            </div>
+
+            <div class="stat-value">
+                ₹{{ monthly_pipeline|floatformat:"0" }}
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- ================= ACTIVE PROJECTS ================= -->
+    <div class="section-title">
+        Active Operations
+        <span class="section-badge">{{ active_projects|length }} Live</span>
+    </div>
+
+    <div class="row g-4">
+        {% for project in active_projects %}
+        <div class="col-12 col-lg-6 col-xl-4">
+            <div class="project-card">
+                
+                <div class="project-header">
+                    <div class="project-brand">
+                        {% if project.logo %}
+                            <img src="{{ project.logo.url }}" class="project-logo" alt="{{ project.title }}">
+                        {% else %}
+                            <div class="project-logo">{{ project.title|slice:":1"|upper }}</div>
+                        {% endif %}
+                        <div>
+                            <h3 class="project-title">{{ project.title }}</h3>
+                            <div class="project-client">{{ project.client.company_name }}</div>
+                        </div>
+                    </div>
+                    <span class="status-badge status-{{ project.status|lower }}">{{ project.get_status_display }}</span>
+                </div>
+
+                <div class="project-desc">
+                    {{ project.description|truncatechars:80 }}
+                </div>
+
+                <div class="project-meta-grid">
+                    <div class="meta-item">
+                        <div class="label">Project Value</div>
+                        <div class="value">₹{{ project.project_value|floatformat:"0" }}</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="label">Deadline</div>
+                        <div class="value">{{ project.deadline|date:"M d, Y"|default:"TBD" }}</div>
+                    </div>
+                </div>
+
+                <div class="project-progress">
+                    <div class="progress-header">
+                        <span>Milestones</span>
+                        <span>{{ project.progress|default:"0" }}%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-bar" style="width: {{ project.progress|default:'0' }}%; background-color: {{ project.primary_color|default:'var(--text-primary)' }}"></div>
+                    </div>
+                </div>
+
+                <div class="project-footer">
+                    <div class="avatar-group">
+                        {% for manager in project.managers.all|slice:":3" %}
+                            <img src="/media/{{manager.profile_image}}" style="height: 40px;border-radius: 50%;" alt="{{ manager.first_name }}">
+                        {% endfor %}
+                        {% if project.managers.count > 3 %}
+                            <div class="avatar" style="background: var(--text-muted);">+{{ project.managers.count|add:"-3" }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="project-actions">
+                        <button class="btn-light-custom"
+
+    data-bs-toggle="modal"
+    data-bs-target="#projectModal"
+
+    onclick='editProjectModal(
+        {{ project.id }},
+        `{{ project.title|escapejs }}`,
+        `{{ project.slug|default:""|escapejs }}`,
+        `{{ project.description|default:""|escapejs }}`,
+        `{{ project.status }}`,
+        `{{ project.project_value }}`,
+        `{{ project.gst_percentage }}`,
+        `{{ project.primary_color|default:"" }}`,
+        `{{ project.secondary_color|default:"" }}`,
+        `{{ project.client.id }}`,
+        `{{ project.start_date|date:"Y-m-d" }}`,
+        `{{ project.deadline|date:"Y-m-d" }}`,
+        `{{ project.advance_paid }}`,
+        `{{ project.remaining_amount }}`
+    )'>
+
+    Edit
+
+</button>
+                        <a href="{% url 'project_details' project.id %}" class="btn-light-custom" style="background: var(--text-primary); color: white;">Open</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-muted">No active projects found.</div>
+        {% endfor %}
+    </div>
+
+    <!-- ================= COMPLETED PROJECTS ================= -->
+    <div class="section-title mt-5">
+        Archived Projects
+        <span class="section-badge" style="background: rgba(46,46,46,0.05); color: var(--text-muted);">{{ completed_projects|length }} Completed</span>
+    </div>
+
+    <div class="row g-3">
+        {% for project in completed_projects %}
+        <div class="col-12 col-xl-6">
+            <div class="project-card-compact">
+                <div class="compact-info">
+                    {% if project.logo %}
+                        <img src="{{ project.logo.url }}" class="project-logo" style="width: 40px; height: 40px;" alt="{{ project.title }}">
+                    {% else %}
+                        <div class="project-logo" style="width: 40px; height: 40px;">{{ project.title|slice:":1"|upper }}</div>
+                    {% endif %}
+                    <div>
+                        <h4 class="project-title" style="font-size: 1rem; margin: 0;">{{ project.title }}</h4>
+                        <div class="project-client" style="font-size: 0.8rem;">{{ project.client.company_name }}</div>
+                    </div>
+                </div>
+                
+                <div class="compact-meta d-none d-md-flex">
+                    <div class="meta-stat">
+                        <div class="label">Completed</div>
+                        <div class="value">{{ project.updated_at|date:"M Y" }}</div>
+                    </div>
+                    <div class="meta-stat">
+                        <div class="label">Value</div>
+                        <div class="value">₹{{ project.project_value|floatformat:"0" }}</div>
+                    </div>
+                    <a href="{% url 'project_detail' project.slug %}" class="btn-light-custom">View</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-muted">No completed projects found.</div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<!-- ================= PROJECT MODAL ================= -->
+<div class="modal fade premium-modal" id="projectModal" tabindex="-1" aria-labelledby="projectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <form method="POST" action="{% url 'save_project' %}" enctype="multipart/form-data" class="modal-content">
+            {% csrf_token %}
+            <input type="hidden" name="project_id" id="edit_project_id">
+
+            <!-- HEADER -->
+            <div class="modal-header">
+                <div>
+                    <h4 class="modal-title" id="projectModalLabel">Project Configuration</h4>
+                    <div class="modal-subtitle">Setup project details, financials, and team assignments.</div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- BODY -->
+            <div class="modal-body">
+
+                <!-- BASIC -->
+                <div class="form-section">
+                    <div class="section-title">Core Details</div>
+                    <div class="section-subtitle">Primary information and internal naming.</div>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Project Title</label>
+                            <input type="text" class="form-control" name="title" id="title" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Slug (URL)</label>
+                            <input type="text" class="form-control" name="slug" id="slug" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" name="description" id="description"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                        <label class="form-label">Start Date</label>
+                        <input type="date"
+               class="form-control"
+               name="start_date"
+               id="start_date"
+               required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Deadline</label>
+                        <input type="date"
+               class="form-control"
+               name="deadline"
+               id="deadline"
+               required>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- CLASSIFICATION -->
+                <div class="form-section">
+                    <div class="section-title">Classification</div>
+                    <div class="section-subtitle">Status routing and client assignment.</div>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" name="status" id="status" required>
+                                <option value="planning">Planning</option>
+                                <option value="active">Active</option>
+                                <option value="on_hold">On Hold</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Client</label>
+                            <select class="form-select" name="client_id" id="client_id" required>
+                                <option value="">Select a Client...</option>
+                                {% for client in clients %}
+                                <option value="{{ client.id }}">{{ client.company_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FINANCIALS -->
+                <div class="form-section">
+                    <div class="section-title">Financial Data</div>
+                    <div class="section-subtitle">Project valuation and tax parameters.</div>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Total Value (₹)</label>
+                            <input type="number" step="0.01" class="form-control" name="value" id="value" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">GST Percentage (%)</label>
+                            <input type="number" step="0.01" class="form-control" name="gst_percentage" id="gst_percentage" value="18.00">
+                        </div>
+                        <div class="col-md-6">
+                        <label class="form-label">Advance Paid</label>
+                        <input type="number"
+               step="0.01"
+               class="form-control"
+               name="advance_paid"
+               id="advance_paid">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Remaining Amount</label>
+                        <input type="number"
+               step="0.01"
+               class="form-control"
+               name="remaining_amount"
+               id="remaining_amount">
+                    </div>
+                    </div>
+                </div>
+
+                <!-- TEAM -->
+                <div class="form-section">
+                    <div class="section-title">Team Assignment</div>
+                    <div class="section-subtitle">Allocate managers and staff to this operational unit.</div>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Assigned Managers</label>
+                            <select class="form-select" name="managers" id="managers" multiple size="4">
+                                {% for manager in managers %}
+                                <option value="{{ manager.id }}">{{ manager.first_name }} {{ manager.last_name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="form-text" style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Hold Ctrl/Cmd to select multiple.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Assigned Staff</label>
+                            <select class="form-select" name="staffs" id="staffs" multiple size="4">
+                                {% for staff in staffs %}
+                                <option value="{{ staff.id }}">{{ staff.first_name }} {{ staff.last_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BRANDING -->
+                <div class="form-section">
+                    <div class="section-title">Visual Identity</div>
+                    <div class="section-subtitle">Customization for client-facing deliverables.</div>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <label class="form-label">Primary Color</label>
+                            <input type="color" class="form-control" name="primary_color" id="primary_color" value="#2E2E2E">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Secondary Color</label>
+                            <input type="color" class="form-control" name="secondary_color" id="secondary_color" value="#6F8F9F">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Project Logo</label>
+                            <input type="file" class="form-control" name="logo" id="logo" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- FOOTER -->
+            <div class="modal-footer">
+                <button type="button" class="btn-light-custom" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn-primary-custom">Save Configuration</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function openProjectModal() {
+
+    document.getElementById('edit_project_id').value = '';
+
+    document.querySelector('#projectModal form').reset();
+
+    document.getElementById('projectModalLabel').innerText =
+        'Create New Project';
+
+    new bootstrap.Modal(
+        document.getElementById('projectModal')
+    ).show();
+}
+
+function editProjectModal(
+    id,
+    title,
+    slug,
+    description,
+    status,
+    value,
+    gst,
+    primary,
+    secondary,
+    clientId,
+    startDate,
+    deadline,
+    advance,
+    remaining
+){
+
+    // PROJECT ID
+    document.getElementById('edit_project_id').value = id;
+
+    // BASIC
+    document.getElementById('title').value = title;
+
+    document.getElementById('slug').value = slug;
+
+    document.getElementById('description').value = description;
+
+    document.getElementById('status').value = status;
+
+    // FINANCIAL
+    document.getElementById('value').value = value;
+
+    document.getElementById('gst_percentage').value = gst;
+
+    document.getElementById('advance_paid').value = advance;
+
+    document.getElementById('remaining_amount').value = remaining;
+
+    // DATES
+    document.getElementById('start_date').value = startDate;
+
+    document.getElementById('deadline').value = deadline;
+
+    // COLORS
+    if(primary){
+        document.getElementById('primary_color').value = primary;
+    }
+
+    if(secondary){
+        document.getElementById('secondary_color').value = secondary;
+    }
+
+    // CLIENT
+    document.getElementById('client_id').value = clientId;
+    document.getElementById('projectModalLabel').innerText =
+    'Edit Project Configuration';
+
+}
+
+</script>
+{% endblock 'body' %}

@@ -1,0 +1,651 @@
+{% extends "master/base.html" %}
+{% block 'title' %}Clients{% endblock %}
+{% block 'css' %}
+  <style>
+
+.page-container{
+    padding: 2rem;
+}
+
+/* ================= HEADER ================= */
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:2rem;
+}
+
+/* ================= CLIENT CARD ================= */
+
+.client-card{
+    background:#ffffff;
+    border-radius:12px;
+    border:1px solid rgba(46,46,46,0.08);
+    box-shadow:0 2px 8px rgba(46,46,46,0.04);
+    padding:1.5rem;
+    height:100%;
+    transition:0.2s ease;
+}
+
+.client-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(46,46,46,0.06);
+}
+
+.client-logo{
+    width:64px;
+    height:64px;
+    border-radius:14px;
+    object-fit:cover;
+    border:1px solid rgba(46,46,46,0.06);
+    flex-shrink:0;
+}
+
+.client-logo-fallback{
+    width:64px;
+    height:64px;
+    border-radius:14px;
+    background:rgba(111,143,159,0.12);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#6F8F9F;
+    font-weight:700;
+    font-size:1.2rem;
+    flex-shrink:0;
+}
+
+.client-company{
+    font-size:1rem;
+    font-weight:600;
+    color:#2E2E2E;
+    margin-bottom:0.15rem;
+}
+
+.client-meta{
+    color:#6b7280;
+    font-size:0.85rem;
+}
+
+.info-label{
+    font-size:0.72rem;
+    text-transform:uppercase;
+    color:#6b7280;
+    margin-bottom:0.25rem;
+    letter-spacing:0.04em;
+}
+
+.info-value{
+    font-size:0.92rem;
+    color:#2E2E2E;
+    word-break:break-word;
+}
+
+.client-section{
+    margin-top:1.25rem;
+}
+
+.action-btn{
+    border-radius:8px;
+    font-size:0.85rem;
+    padding:0.55rem 0.9rem;
+}
+
+/* ================= MODAL ================= */
+
+.modal-content{
+    border:none;
+    border-radius:18px;
+}
+
+.form-label{
+    font-size:0.85rem;
+    font-weight:600;
+    color:#2E2E2E;
+}
+
+.form-control{
+    border-radius:10px;
+    border:1px solid rgba(46,46,46,0.08);
+    padding:0.8rem 1rem;
+    box-shadow:none !important;
+}
+
+.form-control:focus{
+    border-color:#6F8F9F;
+    box-shadow:0 0 0 4px rgba(111,143,159,0.10) !important;
+}
+
+textarea{
+    min-height:100px;
+    resize:none;
+}
+
+.modal-dialog-scrollable .modal-body {
+    overflow-y: auto;
+}
+
+.modal-content {
+    max-height: 90vh;
+    overflow: hidden;
+}
+
+.modal-dialog {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+</style>
+<style>
+/* ================= PREMIUM SAAS MODAL ================= */
+
+.premium-modal .modal-content {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Header */
+.premium-modal .modal-header {
+    border-bottom: 1px solid rgba(46, 46, 46, 0.08);
+    padding: 1.5rem 2rem;
+    background-color: #ffffff;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    align-items: center;
+}
+
+.premium-modal .modal-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    color: #2E2E2E;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.premium-modal .modal-subtitle {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-top: 0.2rem;
+    font-weight: 400;
+}
+
+.premium-modal .btn-close {
+    background-size: 10px;
+    opacity: 0.4;
+    transition: opacity 0.2s ease;
+}
+
+.premium-modal .btn-close:hover {
+    opacity: 1;
+}
+
+.premium-modal .btn-close:focus {
+    box-shadow: none;
+}
+
+/* Body & Scrolling */
+.premium-modal .modal-body {
+    padding: 2rem;
+    background-color: #faf9f8;
+}
+
+.premium-modal .modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+.premium-modal .modal-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+.premium-modal .modal-body::-webkit-scrollbar-thumb {
+    background-color: rgba(46, 46, 46, 0.15);
+    border-radius: 10px;
+}
+.premium-modal .modal-body::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(46, 46, 46, 0.25);
+}
+
+/* Form Sections */
+.premium-modal .form-section {
+    background: #ffffff;
+    border: 1px solid rgba(46, 46, 46, 0.08);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 2px rgba(46, 46, 46, 0.02);
+}
+
+.premium-modal .form-section:last-child {
+    margin-bottom: 0;
+}
+
+.premium-modal .section-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    color: #2E2E2E;
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+}
+
+.premium-modal .section-subtitle {
+    font-family: 'Inter', sans-serif;
+    color: #6b7280;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Inputs */
+.premium-modal .form-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #2E2E2E;
+    margin-bottom: 0.4rem;
+}
+
+.premium-modal .form-control {
+    border-radius: 8px;
+    border: 1px solid rgba(46, 46, 46, 0.12);
+    padding: 0.65rem 1rem;
+    font-size: 0.95rem;
+    color: #2E2E2E;
+    transition: all 0.2s ease;
+    box-shadow: none !important;
+}
+
+.premium-modal .form-control::placeholder {
+    color: #9ca3af;
+}
+
+.premium-modal .form-control:focus {
+    border-color: #6F8F9F;
+    box-shadow: 0 0 0 3px rgba(111, 143, 159, 0.15) !important;
+}
+
+.premium-modal textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.premium-modal input[type="file"].form-control {
+    padding: 0.55rem 1rem;
+    color: #6b7280;
+}
+
+.premium-modal input[type="file"]::file-selector-button {
+    background-color: #f7f3f0;
+    color: #2E2E2E;
+    border: 1px solid rgba(46, 46, 46, 0.08);
+    border-radius: 6px;
+    padding: 0.25rem 0.75rem;
+    margin-right: 1rem;
+    font-weight: 500;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.premium-modal input[type="file"]::file-selector-button:hover {
+    background-color: #ffffff;
+}
+
+/* Footer & Buttons */
+.premium-modal .modal-footer {
+    border-top: 1px solid rgba(46, 46, 46, 0.08);
+    padding: 1.25rem 2rem;
+    background-color: #ffffff;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.premium-modal .btn {
+    padding: 0.6rem 1.25rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.premium-modal .btn-light {
+    background-color: #ffffff;
+    border: 1px solid rgba(46, 46, 46, 0.15);
+    color: #2E2E2E;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.premium-modal .btn-light:hover {
+    background-color: #f7f3f0;
+    border-color: rgba(46, 46, 46, 0.25);
+}
+
+.premium-modal .btn-primary {
+    background-color: #2E2E2E;
+    border: 1px solid #2E2E2E;
+    color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.premium-modal .btn-primary:hover {
+    background-color: #1a1a1a;
+    border-color: #1a1a1a;
+}
+</style>
+{% endblock 'css' %}
+{% block 'body' %}
+<div class="page-container">
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="page-header">
+
+        <div>
+            <h4 class="mb-1">Clients</h4>
+            <div class="text-muted">
+                Manage client businesses, contacts and access.
+            </div>
+        </div>
+
+        <button class="btn btn-primary"
+                onclick="openCreate()" style="background-color: #6F8F9F; border: solid #6F8F9F;" >
+            <i class="ph ph-plus"></i>
+            Add Client
+        </button>
+
+    </div>
+
+    <!-- ================= CLIENT GRID ================= -->
+
+    <div class="row g-4">
+
+        {% for client in clients %}
+
+        <div class="col-xl-4 col-lg-6">
+
+            <div class="client-card">
+
+                <!-- TOP -->
+
+                <div class="d-flex align-items-center gap-3">
+
+                    {% if client.logo %}
+                        <img src="{{ client.logo.url }}" class="client-logo">
+                    {% else %}
+                        <div class="client-logo-fallback">
+                            {{ client.company_name|slice:":1"|upper }}
+                        </div>
+                    {% endif %}
+
+                    <div>
+
+                        <div class="client-company">
+                            {{ client.company_name }}
+                        </div>
+
+                        <div class="client-meta">
+                            {{ client.user.first_name }} {{ client.user.last_name }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- CONTACT -->
+
+                <div class="client-section">
+
+                    <div class="row g-3">
+
+                        <div class="col-6">
+                            <div class="info-label">Official Email</div>
+                            <div class="info-value">{{ client.official_email }}</div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="info-label">Phone</div>
+                            <div class="info-value">{{ client.phone }}</div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="info-label">POC</div>
+                            <div class="info-value">{{ client.poc_name }}</div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="info-label">GSTIN</div>
+                            <div class="info-value">{{ client.gstin }}</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ACTIONS -->
+
+                <div class="d-flex gap-2 mt-4">
+
+                    <button class="btn btn-light action-btn w-100"
+                        onclick="openEdit(
+                            '{{ client.id }}',
+                            '{{ client.user.first_name }}',
+                            '{{ client.user.last_name }}',
+                            '{{ client.user.username }}',
+                            '{{ client.user.email }}',
+                            '{{ client.company_name }}',
+                            '{{ client.official_email }}',
+                            '{{ client.phone }}',
+                            '{{ client.poc_name }}',
+                            '{{ client.poc_email }}',
+                            '{{ client.poc_phone }}',
+                            '{{ client.address|escapejs }}',
+                            '{{ client.gstin }}',
+                            '{{ client.website }}'
+                        )">
+
+                        Edit
+
+                    </button>
+
+                    <a href="#" class="btn btn-dark action-btn w-100">
+                        Projects
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal fade premium-modal" id="clientModal" tabindex="-1" aria-labelledby="clientModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        
+        <!-- FIX: The form IS the modal-content now -->
+        <form method="POST" action="{% url 'add_client' %}" enctype="multipart/form-data" class="modal-content">
+            {% csrf_token %}
+            <input type="hidden" name="client_id" id="client_id">
+
+            <!-- STICKY HEADER -->
+            <div class="modal-header">
+                <div>
+                    <h4 class="modal-title" id="clientModalLabel">Client Workspace Setup</h4>
+                    <div class="modal-subtitle">Configure account access, business details, and billing information.</div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- SCROLLABLE BODY -->
+            <div class="modal-body">
+
+                <!-- SECTION: ACCOUNT -->
+                <div class="form-section">
+                    <div class="section-title">Account Information</div>
+                    <div class="section-subtitle">Credentials and personal details for the primary user.</div>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label class="form-label" for="first_name">First Name</label>
+                            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="e.g. Jane" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="last_name">Last Name</label>
+                            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="e.g. Doe" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="username">Username</label>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="e.g. janedoe" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="email">Email Address</label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="name@company.com" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label" for="password">Password</label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Leave blank to keep existing password (if editing)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION: BUSINESS -->
+                <div class="form-section">
+                    <div class="section-title">Business Information</div>
+                    <div class="section-subtitle">Company identification and public facing details.</div>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label class="form-label" for="company_name">Company Name</label>
+                            <input type="text" class="form-control" name="company_name" id="company_name" placeholder="Acme Corp" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="official_email">Official Email</label>
+                            <input type="email" class="form-control" name="official_email" id="official_email" placeholder="contact@acme.com">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="phone">Business Phone</label>
+                            <input type="text" class="form-control" name="phone" id="phone" placeholder="+1 (555) 000-0000">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="website">Website</label>
+                            <input type="url" class="form-control" name="website" id="website" placeholder="https://acme.com">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="gstin">Tax ID / GSTIN</label>
+                            <input type="text" class="form-control" name="gstin" id="gstin" placeholder="Ex. 22AAAAA0000A1Z5">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="logo">Company Logo</label>
+                            <input type="file" class="form-control" name="logo" id="logo" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION: POC -->
+                <div class="form-section">
+                    <div class="section-title">Point of Contact</div>
+                    <div class="section-subtitle">Primary operational contact for projects and communication.</div>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <label class="form-label" for="poc_name">Contact Name</label>
+                            <input type="text" class="form-control" name="poc_name" id="poc_name" placeholder="John Smith">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="poc_email">Contact Email</label>
+                            <input type="email" class="form-control" name="poc_email" id="poc_email" placeholder="john@acme.com">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="poc_phone">Contact Phone</label>
+                            <input type="text" class="form-control" name="poc_phone" id="poc_phone" placeholder="+1 (555) 123-4567">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION: ADDRESS -->
+                <div class="form-section">
+                    <div class="section-title">Registered Address</div>
+                    <div class="section-subtitle">Physical location used for billing and legal documentation.</div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="form-label" for="address">Full Address</label>
+                            <textarea class="form-control" name="address" id="address" placeholder="123 Corporate Blvd, Suite 400&#10;City, State, ZIP&#10;Country"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- STICKY FOOTER -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save Workspace</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+
+function openCreate(){
+
+    document.querySelector('#clientModal form').reset();
+
+    document.getElementById('client_id').value = '';
+
+    new bootstrap.Modal(document.getElementById('clientModal')).show();
+}
+
+function openEdit(
+    id,
+    fname,
+    lname,
+    username,
+    email,
+    company,
+    official_email,
+    phone,
+    poc_name,
+    poc_email,
+    poc_phone,
+    address,
+    gstin,
+    website
+){
+
+    document.getElementById('client_id').value = id;
+
+    document.getElementById('first_name').value = fname;
+    document.getElementById('last_name').value = lname;
+    document.getElementById('username').value = username;
+    document.getElementById('email').value = email;
+
+    document.getElementById('company_name').value = company;
+    document.getElementById('official_email').value = official_email;
+    document.getElementById('phone').value = phone;
+
+    document.getElementById('poc_name').value = poc_name;
+    document.getElementById('poc_email').value = poc_email;
+    document.getElementById('poc_phone').value = poc_phone;
+
+    document.getElementById('address').value = address;
+    document.getElementById('gstin').value = gstin;
+    document.getElementById('website').value = website;
+
+    new bootstrap.Modal(document.getElementById('clientModal')).show();
+}
+
+</script>
+
+{% endblock %}

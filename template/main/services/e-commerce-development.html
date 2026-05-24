@@ -1,0 +1,218 @@
+{% extends "main/base.html" %}
+
+{% block title %}E-Commerce Development Company | Big Scoop Studio{% endblock title %}
+
+{% block meta %}
+<meta name="description" content="Custom e-commerce development for Indian brands by Big Scoop Studio. Fast, owned storefronts built for conversion — no plugin bloat, no template limits, no monthly subscriptions for core logic.">
+<meta name="keywords" content="custom ecommerce development India, ecommerce website development India, D2C ecommerce India, ecommerce development agency India, Shopify alternative India, custom online store India, headless ecommerce India, ecommerce conversion India, ecommerce performance India">
+<link rel="canonical" href="https://www.bigscoopstudio.com/services/e-commerce-development/">
+
+<meta property="og:site_name" content="Big Scoop Studio">
+<meta property="og:title" content="Custom E-Commerce Development India | Big Scoop Studio">
+<meta property="og:description" content="Fast, owned, conversion-focused storefronts for Indian D2C and retail brands. No plugin bloat. No template limits. Full ownership.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.bigscoopstudio.com/services/e-commerce-development/">
+<meta property="og:locale" content="en_IN">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Custom E-Commerce Development India | Big Scoop Studio">
+<meta name="twitter:description" content="Fast, owned storefronts for Indian brands. No plugin bloat. Full conversion-focused architecture.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Custom E-Commerce Development",
+  "url": "https://www.bigscoopstudio.com/services/e-commerce-development/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Big Scoop Studio",
+    "url": "https://www.bigscoopstudio.com",
+    "address": { "@type": "PostalAddress", "addressCountry": "IN" }
+  },
+  "description": "Custom e-commerce development for Indian brands. Fast storefronts, clean architecture, full ownership — no plugin dependency, no template limits.",
+  "serviceType": "E-Commerce Development",
+  "areaServed": { "@type": "Country", "name": "India" },
+  "audience": { "@type": "Audience", "audienceType": "D2C brands, retail businesses, Indian founders" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why choose custom e-commerce over Shopify for an Indian brand?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Custom e-commerce gives you full ownership of core logic, eliminates monthly plugin fees, and lets you build for Indian consumer behaviour — checkout flows, payment methods, and UX patterns that Shopify templates were not designed for."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How fast is a custom-built e-commerce store compared to a template store?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A lean custom-built store without plugin bloat routinely achieves sub-2-second load times on mobile, compared to 4–8 seconds for heavily-plugged Shopify or WooCommerce stores. Every second of improvement directly impacts conversion rate."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does Big Scoop Studio build for e-commerce clients?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We build custom storefronts, product catalog systems, checkout and payment flows, inventory management, CRM integration, and post-purchase automation — all owned by the business, not rented from third-party apps."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is custom e-commerce development expensive?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Over a 3-year horizon, a lean custom build is often cheaper than a Shopify setup with 10–15 paid apps. The upfront cost is higher, but the recurring cost and ownership advantage compound in your favour."
+      }
+    }
+  ]
+}
+</script>
+{% endblock meta %}
+
+{% block css %}
+<style>
+    .service-page {
+        padding: 7rem 0 5rem;
+        background: var(--brand-light, #f7f3f0);
+    }
+
+    .service-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+        gap: 3rem;
+        align-items: center;
+    }
+
+    .service-kicker {
+        color: var(--brand-accent, #6F8F9F);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .08em;
+        font-size: .8rem;
+    }
+
+    .service-title {
+        font-size: clamp(2.4rem, 5vw, 4.8rem);
+        line-height: .95;
+        margin: 1rem 0;
+    }
+
+    .service-copy {
+        color: #555;
+        font-size: 1.08rem;
+        line-height: 1.8;
+        max-width: 680px;
+    }
+
+    .service-points {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .service-point,
+    .service-form {
+        background: #fff;
+        border: 1px solid rgba(46, 46, 46, .08);
+        border-radius: 14px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 30px rgba(46, 46, 46, .05);
+    }
+
+    .service-point h3 {
+        font-size: 1rem;
+        margin-bottom: .5rem;
+    }
+
+    .service-point p {
+        color: #666;
+        margin: 0;
+        font-size: .92rem;
+        line-height: 1.6;
+    }
+
+    .service-form h2 {
+        font-size: 1.35rem;
+        margin-bottom: .5rem;
+    }
+
+    .service-form p {
+        color: #666;
+        font-size: .92rem;
+        line-height: 1.6;
+    }
+
+    .service-form .form-control {
+        border-radius: 10px;
+        padding: .85rem 1rem;
+    }
+
+    .service-form textarea {
+        min-height: 120px;
+    }
+
+    @media (max-width: 991px) {
+        .service-hero,
+        .service-points {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock css %}
+
+{% block body %}
+<main class="service-page">
+    <div class="container px-4 px-lg-5">
+        <section class="service-hero">
+            <div>
+                <div class="service-kicker">E-Commerce Development</div>
+                <h1 class="service-title font-heading">Stores that sell, not just sit pretty.</h1>
+                <p class="service-copy">
+                    We build stores that sell, with clean architecture, fast loading, and no plugin bloat. You own the system, the data, and the growth engine without recurring tools quietly bleeding your margins.
+                </p>
+
+                <div class="service-points">
+                    <div class="service-point">
+                        <h3 class="font-heading">Sub-2-Second Thinking</h3>
+                        <p>Performance-first storefronts built for conversions and search visibility.</p>
+                    </div>
+                    <div class="service-point">
+                        <h3 class="font-heading">Clean Ownership</h3>
+                        <p>Your store is built around your business, without dependency traps.</p>
+                    </div>
+                    <div class="service-point">
+                        <h3 class="font-heading">Conversion Systems</h3>
+                        <p>Checkout, catalog, and UX decisions shaped around revenue.</p>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="service-form">
+                <h2 class="font-heading">Build My Store</h2>
+                <p>Share your details. We will review your e-commerce goals and reach out with the next move.</p>
+                <form method="POST" action="{% url 'service_page_lead' 'e-commerce-development' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="source" value="website">
+                    <div class="mb-3"><input class="form-control" type="text" name="name" placeholder="Your name" required></div>
+                    <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email address" required></div>
+                    <div class="mb-3"><input class="form-control" type="tel" name="contact_number" placeholder="Phone number" required></div>
+                    <div class="mb-4"><textarea class="form-control" name="context" placeholder="Tell us about your store, products, platform, or target launch."></textarea></div>
+                    <button class="btn-agency-primary w-100 py-3" type="submit">Request E-Commerce Strategy</button>
+                </form>
+            </aside>
+        </section>
+    </div>
+</main>
+{% endblock body %}
+
+{% block script %}{% endblock script %}
