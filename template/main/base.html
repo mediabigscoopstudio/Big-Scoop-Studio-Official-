@@ -7,6 +7,7 @@
     <title>{% block title %}{% endblock title %}</title>
     <link rel="shortcut icon" href="/static/Logos/Vector_big_scoop_studio.webp" type="image/x-icon">
     {% block meta %}{% endblock meta %}
+    <meta name="google-site-verification" content="uLLGUdQfEgu5LxC-4BgdBPP0-1CsbGx_qK2ggWUVNjo" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -171,21 +172,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'about' %}">About</a>
                     </li>
-                    
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Services
-                        </a>
-                        <ul class="dropdown-menu agency-dropdown border-0" aria-labelledby="servicesDropdown">
-                            <li><a class="dropdown-item" href="{% url 'service_page' 'e-commerce-development' %}">E-Commerce Development</a></li>
-                            <li><a class="dropdown-item" href="{% url 'service_page' 'ai-powered-automation' %}">AI-Powered Automation</a></li>
-                            <li><a class="dropdown-item" href="{% url 'service_page' 'custom-crm-development' %}">Custom CRM Development</a></li>
-                        </ul>
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Services' %}">Services</a>
                     </li>
                     
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Work</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'insights' %}">Insights</a>
                     </li>
