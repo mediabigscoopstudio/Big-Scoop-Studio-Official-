@@ -1,0 +1,1607 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Friend — India's Smartest Used Car Marketplace</title>
+    <meta name="description" content="Professional 300-point inspection. Live dealer auctions. Verified transactions. Get the true value of your used car with Car Friend.">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ================================================
+           CAR FRIEND — DESIGN SYSTEM
+        ================================================ */
+        :root {
+            --cf-primary:       #166534;
+            --cf-primary-mid:   #1a7a3e;
+            --cf-primary-light: #22c55e;
+            --cf-primary-dark:  #0d4a24;
+            --cf-accent:        #4ade80;
+            --cf-accent-dim:    rgba(74,222,128,0.15);
+            --cf-dark:          #080e08;
+            --cf-dark-2:        #0f1a0f;
+            --cf-dark-3:        #1a2a1a;
+            --cf-white:         #ffffff;
+            --cf-gray-1:        #f5f7f5;
+            --cf-gray-2:        #e4e9e4;
+            --cf-gray-3:        #9ca39c;
+            --cf-text:          #1a2a1a;
+            --cf-text-light:    #6b7a6b;
+            --font-h:           'Plus Jakarta Sans', sans-serif;
+            --font-b:           'Inter', sans-serif;
+            --r-sm:  8px;
+            --r-md:  16px;
+            --r-lg:  24px;
+            --r-xl:  32px;
+            --r-2xl: 40px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-b);
+            color: var(--cf-text);
+            background: var(--cf-white);
+            overflow-x: hidden;
+        }
+        h1,h2,h3,h4,h5,h6 { font-family: var(--font-h); }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--cf-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--cf-primary); border-radius: 3px; }
+        ::selection { background: rgba(22,101,52,.2); }
+
+        /* ================================================
+           NAVBAR
+        ================================================ */
+        #cfNav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 22px 0;
+            transition: all .35s ease;
+        }
+        #cfNav.scrolled {
+            background: rgba(8,14,8,.94);
+            backdrop-filter: blur(24px);
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(74,222,128,.12);
+            box-shadow: 0 4px 24px rgba(0,0,0,.4);
+        }
+        #cfNav .nav-link {
+            font-family: var(--font-h);
+            font-weight: 500;
+            font-size: .875rem;
+            color: rgba(255,255,255,.78) !important;
+            padding: 8px 15px !important;
+            letter-spacing: .01em;
+            transition: color .2s;
+        }
+        #cfNav .nav-link:hover { color: var(--cf-accent) !important; }
+
+        .btn-nav-sell {
+            background: linear-gradient(135deg, var(--cf-primary-light), var(--cf-primary));
+            color: #fff; border: none;
+            padding: 9px 22px; border-radius: 50px;
+            font-family: var(--font-h); font-weight: 700; font-size: .875rem;
+            transition: all .3s; letter-spacing: .02em; cursor: pointer;
+        }
+        .btn-nav-sell:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(34,197,94,.38);
+            color: #fff;
+        }
+        .btn-nav-outline {
+            background: transparent;
+            color: rgba(255,255,255,.82);
+            border: 1.5px solid rgba(255,255,255,.28);
+            padding: 8px 20px; border-radius: 50px;
+            font-family: var(--font-h); font-weight: 600; font-size: .875rem;
+            transition: all .3s; cursor: pointer;
+        }
+        .btn-nav-outline:hover {
+            border-color: var(--cf-accent);
+            color: var(--cf-accent);
+            background: rgba(74,222,128,.06);
+        }
+
+        /* ================================================
+           HERO
+        ================================================ */
+        .cf-hero {
+            min-height: 100vh;
+            background: var(--cf-dark);
+            display: flex; align-items: center;
+            position: relative; overflow: hidden;
+            padding: 120px 0 80px;
+        }
+        .hero-bg-glow {
+            position: absolute; inset: 0; pointer-events: none;
+            background:
+                radial-gradient(ellipse 90% 80% at 15% 55%, rgba(22,101,52,.28) 0%, transparent 58%),
+                radial-gradient(ellipse 55% 50% at 85% 15%, rgba(34,197,94,.12) 0%, transparent 52%),
+                radial-gradient(ellipse 40% 40% at 75% 85%, rgba(22,101,52,.1) 0%, transparent 50%);
+        }
+        .hero-grid {
+            position: absolute; inset: 0; pointer-events: none;
+            background-image:
+                linear-gradient(rgba(74,222,128,.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74,222,128,.06) 1px, transparent 1px);
+            background-size: 52px 52px;
+        }
+        .hero-grid::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse 100% 60% at 50% 100%, var(--cf-dark) 0%, transparent 70%);
+        }
+
+        /* hero badge */
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(22,101,52,.25);
+            border: 1px solid rgba(74,222,128,.25);
+            color: var(--cf-accent);
+            padding: 6px 16px; border-radius: 50px;
+            font-family: var(--font-h); font-size: .72rem;
+            font-weight: 700; letter-spacing: .1em;
+            text-transform: uppercase; margin-bottom: 28px;
+        }
+        .pulse-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--cf-accent);
+            animation: pulseDot 1.8s ease-in-out infinite;
+        }
+        @keyframes pulseDot {
+            0%,100% { opacity:1; transform:scale(1); }
+            50%      { opacity:.4; transform:scale(.7); }
+        }
+
+        /* hero title */
+        .hero-title {
+            font-size: clamp(2.6rem, 6vw, 5.2rem);
+            font-weight: 800; color: #fff;
+            line-height: 1.08; letter-spacing: -.03em;
+            margin-bottom: 22px;
+        }
+        .hero-title .grad {
+            background: linear-gradient(135deg, #86efac 0%, #4ade80 40%, #22c55e 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-sub {
+            font-size: clamp(.95rem, 1.8vw, 1.15rem);
+            color: rgba(255,255,255,.58);
+            line-height: 1.75; max-width: 510px;
+            margin-bottom: 42px;
+        }
+
+        /* hero CTAs */
+        .hero-cta-row { display:flex; gap:14px; flex-wrap:wrap; margin-bottom: 60px; }
+        .btn-hero-primary {
+            background: linear-gradient(135deg, #22c55e, #166534);
+            color: #fff; border: none;
+            padding: 15px 34px; border-radius: 50px;
+            font-family: var(--font-h); font-weight: 700; font-size: .95rem;
+            display: inline-flex; align-items: center; gap: 10px;
+            transition: all .3s; cursor: pointer;
+        }
+        .btn-hero-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 32px rgba(34,197,94,.42);
+            color: #fff;
+        }
+        .btn-hero-secondary {
+            background: rgba(255,255,255,.07);
+            color: rgba(255,255,255,.88);
+            border: 1.5px solid rgba(255,255,255,.2);
+            padding: 14px 32px; border-radius: 50px;
+            font-family: var(--font-h); font-weight: 600; font-size: .95rem;
+            display: inline-flex; align-items: center; gap: 10px;
+            backdrop-filter: blur(12px); transition: all .3s; cursor: pointer;
+        }
+        .btn-hero-secondary:hover {
+            background: rgba(255,255,255,.13);
+            border-color: rgba(74,222,128,.5);
+            color: #fff; transform: translateY(-3px);
+        }
+
+        /* hero stat strip */
+        .hero-stats { display:flex; flex-wrap:wrap; gap:0; }
+        .hstat {
+            flex: 1; min-width: 130px;
+            border-left: 1px solid rgba(255,255,255,.1);
+            padding: 0 28px;
+        }
+        .hstat:first-child { border-left: none; padding-left: 0; }
+        .hstat-num {
+            font-family: var(--font-h); font-size: 2.1rem;
+            font-weight: 800; color: #fff; line-height: 1;
+            margin-bottom: 5px;
+        }
+        .hstat-num em { color: var(--cf-accent); font-style: normal; }
+        .hstat-lbl {
+            font-size: .75rem; color: rgba(255,255,255,.42);
+            font-weight: 500; letter-spacing: .02em;
+        }
+
+        /* hero right — auction card */
+        .hero-right { position: relative; padding: 24px 16px 24px 32px; }
+        .auction-glass {
+            background: rgba(255,255,255,.04);
+            backdrop-filter: blur(22px);
+            border: 1px solid rgba(74,222,128,.18);
+            border-radius: var(--r-2xl);
+            padding: 28px;
+            animation: floatCard 5s ease-in-out infinite;
+        }
+        @keyframes floatCard {
+            0%,100% { transform: translateY(0); }
+            50%      { transform: translateY(-14px); }
+        }
+
+        .live-pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(239,68,68,.14);
+            border: 1px solid rgba(239,68,68,.28);
+            color: #fca5a5; padding: 4px 12px;
+            border-radius: 50px; font-size: .7rem;
+            font-weight: 700; letter-spacing: .1em;
+            text-transform: uppercase; font-family: var(--font-h);
+        }
+        .live-pill .pulse-dot { background: #f87171; }
+
+        .ac-car-chip {
+            background: rgba(255,255,255,.05);
+            border-radius: 14px; padding: 14px 16px;
+            display: flex; align-items: center; gap: 14px;
+            margin: 18px 0 16px;
+        }
+        .ac-car-icon {
+            font-size: 2.4rem; line-height: 1;
+        }
+        .ac-car-name {
+            font-family: var(--font-h); font-weight: 700;
+            color: #fff; font-size: 1.15rem; line-height: 1.2;
+        }
+        .ac-car-meta {
+            display: flex; gap: 14px; flex-wrap: wrap;
+            margin-top: 5px;
+        }
+        .ac-car-meta span {
+            font-size: .72rem; color: rgba(255,255,255,.42);
+            display: flex; align-items: center; gap: 4px;
+        }
+        .bid-box {
+            background: rgba(22,101,52,.22);
+            border: 1px solid rgba(74,222,128,.14);
+            border-radius: var(--r-md); padding: 16px;
+            margin-bottom: 14px;
+        }
+        .bid-box-lbl {
+            font-size: .68rem; color: rgba(255,255,255,.38);
+            font-weight: 700; letter-spacing: .1em;
+            text-transform: uppercase; margin-bottom: 5px;
+        }
+        .bid-box-amt {
+            font-family: var(--font-h); font-weight: 800;
+            color: var(--cf-accent); font-size: 2rem; line-height: 1;
+        }
+        .bid-box-cnt {
+            font-size: .75rem; color: rgba(255,255,255,.38); margin-top: 4px;
+        }
+        .timer-row {
+            display: flex; align-items: center; gap: 8px;
+            color: rgba(255,255,255,.6); font-size: .82rem;
+            font-weight: 600; margin-bottom: 14px;
+        }
+        .timer-val {
+            background: rgba(255,255,255,.1);
+            padding: 3px 10px; border-radius: 7px;
+            font-family: var(--font-h); font-weight: 700;
+            color: #fff; font-size: .95rem;
+        }
+        .dealer-row {
+            display: flex; align-items: center; gap: 10px;
+        }
+        .davatar-stack { display:flex; }
+        .davatar {
+            width: 26px; height: 26px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--cf-primary), #22c55e);
+            border: 2px solid rgba(8,14,8,.85);
+            display: flex; align-items: center; justify-content: center;
+            font-size: .58rem; font-weight: 700; color: #fff;
+            margin-left: -7px;
+        }
+        .davatar:first-child { margin-left: 0; }
+        .dealer-lbl { font-size: .75rem; color: rgba(255,255,255,.42); }
+
+        /* floating badges */
+        .float-badge {
+            position: absolute;
+            background: rgba(20,30,20,.88);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: var(--r-md);
+            padding: 11px 15px;
+            display: flex; align-items: center; gap: 10px;
+            z-index: 5;
+        }
+        .fb-top { top: 12px; right: -8px; animation: floatB1 4s ease-in-out infinite; }
+        .fb-bot { bottom: 16px; left: -16px; animation: floatB2 5.5s ease-in-out infinite; }
+        @keyframes floatB1 { 0%,100%{transform:translateY(-6px)} 50%{transform:translateY(6px)} }
+        @keyframes floatB2 { 0%,100%{transform:translateY(5px)} 50%{transform:translateY(-9px)} }
+        .fb-icon {
+            width: 34px; height: 34px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; font-size: .85rem;
+        }
+        .fb-title { font-family:var(--font-h); font-weight:700; color:#fff; font-size:.8rem; }
+        .fb-sub   { font-size:.68rem; color:rgba(255,255,255,.38); margin-top:1px; }
+
+        /* ================================================
+           TRUST STRIP
+        ================================================ */
+        .trust-strip {
+            background: rgba(22,101,52,.06);
+            border-top: 1px solid rgba(22,101,52,.1);
+            border-bottom: 1px solid rgba(22,101,52,.1);
+            padding: 18px 0;
+        }
+        .titem {
+            display:flex; align-items:center; gap:10px;
+            padding: 0 28px;
+            border-right: 1px solid rgba(22,101,52,.15);
+            justify-content: center;
+        }
+        .titem:last-child { border-right:none; }
+        .ticon {
+            width:34px; height:34px; border-radius:10px;
+            background: linear-gradient(135deg, var(--cf-primary-dark), var(--cf-primary));
+            display:flex; align-items:center; justify-content:center;
+            color:#fff; font-size:.82rem; flex-shrink:0;
+        }
+        .ttext strong { display:block; font-family:var(--font-h); font-size:.88rem; font-weight:700; color:var(--cf-text); }
+        .ttext span   { font-size:.72rem; color:var(--cf-text-light); }
+
+        /* ================================================
+           SECTION BASE
+        ================================================ */
+        .sec { padding: 100px 0; }
+        .sec-sm { padding: 64px 0; }
+        .eyebrow {
+            display: inline-block;
+            font-family: var(--font-h); font-size: .7rem;
+            font-weight: 700; letter-spacing: .14em;
+            text-transform: uppercase; color: var(--cf-primary);
+            background: rgba(22,101,52,.08);
+            border: 1px solid rgba(22,101,52,.15);
+            padding: 5px 14px; border-radius: 50px;
+            margin-bottom: 14px;
+        }
+        .eyebrow-light {
+            color: var(--cf-accent);
+            background: rgba(74,222,128,.1);
+            border-color: rgba(74,222,128,.2);
+        }
+        .sec-title {
+            font-size: clamp(1.85rem, 4vw, 3rem);
+            font-weight: 800; color: var(--cf-text);
+            line-height: 1.15; letter-spacing: -.025em;
+            margin-bottom: 16px;
+        }
+        .sec-title .hl { color: var(--cf-primary); }
+        .sec-title-light {
+            font-size: clamp(1.85rem, 4vw, 3rem);
+            font-weight: 800; color: #fff;
+            line-height: 1.15; letter-spacing: -.025em;
+            margin-bottom: 16px;
+        }
+        .sec-title-light .hl {
+            background: linear-gradient(135deg, #86efac, #4ade80, #22c55e);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .sec-sub {
+            font-size: 1.02rem; color: var(--cf-text-light);
+            line-height: 1.75; max-width: 560px;
+        }
+
+        /* ================================================
+           HOW IT WORKS
+        ================================================ */
+        .how-bg { background: var(--cf-gray-1); }
+        .step-card {
+            background: #fff;
+            border: 1px solid var(--cf-gray-2);
+            border-radius: var(--r-xl);
+            padding: 36px 28px 32px;
+            position: relative; height: 100%;
+            transition: all .3s ease;
+            overflow: hidden;
+        }
+        .step-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cf-primary), var(--cf-primary-light));
+            opacity: 0; transition: opacity .3s;
+        }
+        .step-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(22,101,52,.1); border-color: rgba(22,101,52,.25); }
+        .step-card:hover::before { opacity:1; }
+        .step-bg-num {
+            position: absolute; top: 12px; right: 20px;
+            font-family: var(--font-h); font-size: 5.5rem;
+            font-weight: 800; color: rgba(22,101,52,.055);
+            line-height: 1; user-select: none;
+        }
+        .step-icon {
+            width: 54px; height: 54px; border-radius: var(--r-md);
+            background: linear-gradient(135deg, var(--cf-primary-dark), var(--cf-primary));
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 1.35rem; margin-bottom: 22px;
+        }
+        .step-title { font-family:var(--font-h); font-size:1.15rem; font-weight:700; color:var(--cf-text); margin-bottom:10px; }
+        .step-desc  { color:var(--cf-text-light); font-size:.88rem; line-height:1.75; }
+        .step-arrow {
+            position: absolute; right: -20px; top: 48px;
+            color: rgba(22,101,52,.25); font-size: 1.1rem; z-index:2;
+        }
+
+        /* ================================================
+           STATS
+        ================================================ */
+        .stats-bg {
+            background: linear-gradient(135deg, var(--cf-primary-dark) 0%, var(--cf-primary) 55%, var(--cf-primary-mid) 100%);
+            position: relative; overflow: hidden;
+        }
+        .stats-bg::before {
+            content:''; position:absolute; inset:0;
+            background-image:
+                linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+            background-size: 42px 42px;
+        }
+        .stat-card { padding: 42px 20px; text-align:center; position:relative; }
+        .stat-card::after {
+            content:''; position:absolute; right:0; top:22%;
+            height:56%; width:1px; background:rgba(255,255,255,.14);
+        }
+        .stat-card:last-child::after { display:none; }
+        .stat-ico { font-size:1.4rem; color:var(--cf-accent); opacity:.55; margin-bottom:14px; }
+        .stat-num {
+            font-family: var(--font-h); font-weight:800;
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            color:#fff; line-height:1; margin-bottom:8px;
+        }
+        .stat-num em { color:var(--cf-accent); font-style:normal; }
+        .stat-lbl { font-size:.88rem; color:rgba(255,255,255,.6); font-weight:500; }
+
+        /* ================================================
+           FOR DEALERS
+        ================================================ */
+        .dealers-bg { background: var(--cf-dark-2); }
+        .dealer-feat {
+            display:flex; align-items:flex-start; gap:16px; margin-bottom:26px;
+        }
+        .dealer-feat-icon {
+            width:44px; height:44px; min-width:44px; border-radius:var(--r-sm);
+            background: rgba(22,101,52,.28);
+            border: 1px solid rgba(74,222,128,.18);
+            display:flex; align-items:center; justify-content:center;
+            color:var(--cf-accent); font-size:.95rem;
+        }
+        .dealer-feat-title { font-family:var(--font-h); font-weight:700; color:#fff; margin-bottom:4px; }
+        .dealer-feat-desc  { font-size:.85rem; color:rgba(255,255,255,.45); line-height:1.65; }
+
+        /* auction panel preview */
+        .auction-panel {
+            background: rgba(255,255,255,.03);
+            border: 1px solid rgba(74,222,128,.14);
+            border-radius: var(--r-xl);
+            overflow: hidden;
+        }
+        .ap-header {
+            background: rgba(22,101,52,.18);
+            border-bottom: 1px solid rgba(74,222,128,.1);
+            padding: 16px 22px;
+            display:flex; align-items:center; justify-content:space-between;
+        }
+        .ap-header-title { font-family:var(--font-h); font-weight:700; color:#fff; font-size:.9rem; }
+        .ap-header-sub   { font-size:.7rem; color:rgba(255,255,255,.35); margin-top:2px; }
+        .ap-row {
+            padding: 18px 22px;
+            display:flex; align-items:center; gap:14px;
+            border-bottom: 1px solid rgba(255,255,255,.05);
+            transition: background .2s;
+        }
+        .ap-row:hover { background:rgba(255,255,255,.025); }
+        .ap-row:last-child { border-bottom:none; }
+        .ap-thumb {
+            width:58px; height:40px; border-radius:10px;
+            background: linear-gradient(135deg, rgba(22,101,52,.4), rgba(34,197,94,.18));
+            display:flex; align-items:center; justify-content:center;
+            color:var(--cf-accent); font-size:1.3rem; flex-shrink:0;
+        }
+        .ap-info { flex:1; min-width:0; }
+        .ap-car-name { font-family:var(--font-h); font-weight:600; color:#fff; font-size:.88rem; margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .ap-car-meta { font-size:.7rem; color:rgba(255,255,255,.38); }
+        .ap-bid { text-align:right; flex-shrink:0; }
+        .ap-bid-amt { font-family:var(--font-h); font-weight:700; color:var(--cf-accent); font-size:.95rem; }
+        .ap-bid-sub { font-size:.68rem; color:rgba(255,255,255,.35); margin-top:1px; }
+        .status-live {
+            display:inline-block; padding:2px 8px;
+            background:rgba(239,68,68,.14); border:1px solid rgba(239,68,68,.22);
+            border-radius:20px; font-size:.63rem; color:#fca5a5;
+            font-weight:700; letter-spacing:.06em; margin-top:3px;
+        }
+        .status-ocb {
+            display:inline-block; padding:2px 8px;
+            background:rgba(96,165,250,.14); border:1px solid rgba(96,165,250,.22);
+            border-radius:20px; font-size:.63rem; color:#93c5fd;
+            font-weight:700; letter-spacing:.06em; margin-top:3px;
+        }
+        .ap-footer {
+            padding:14px 22px; text-align:center;
+            border-top: 1px solid rgba(255,255,255,.05);
+        }
+        .btn-ap-more {
+            background:none; border:none;
+            color:var(--cf-accent); font-size:.82rem;
+            font-weight:700; font-family:var(--font-h);
+            cursor:pointer; transition:opacity .2s;
+        }
+        .btn-ap-more:hover { opacity:.7; }
+
+        /* ================================================
+           WHY CHOOSE US
+        ================================================ */
+        .feat-card {
+            background:#fff;
+            border: 1px solid var(--cf-gray-2);
+            border-radius: var(--r-xl); padding: 32px 26px;
+            height:100%; transition:all .3s;
+            position:relative; overflow:hidden;
+        }
+        .feat-card::after {
+            content:''; position:absolute; bottom:0; left:0; right:0;
+            height:3px; background:linear-gradient(90deg,var(--cf-primary),var(--cf-primary-light));
+            transform:scaleX(0); transform-origin:left; transition:transform .3s;
+        }
+        .feat-card:hover { transform:translateY(-7px); box-shadow:0 20px 42px rgba(22,101,52,.1); border-color:rgba(22,101,52,.22); }
+        .feat-card:hover::after { transform:scaleX(1); }
+        .feat-icon-wrap {
+            width:58px; height:58px; border-radius:var(--r-md);
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.5rem; margin-bottom:20px;
+        }
+        .feat-title { font-family:var(--font-h); font-size:1.08rem; font-weight:700; color:var(--cf-text); margin-bottom:10px; }
+        .feat-desc  { color:var(--cf-text-light); font-size:.875rem; line-height:1.75; }
+
+        /* ================================================
+           INSPECTION SECTION
+        ================================================ */
+        .insp-bg { background: linear-gradient(180deg, var(--cf-gray-1) 0%, #fff 100%); }
+        .big-score-box {
+            background: linear-gradient(135deg, var(--cf-primary-dark), var(--cf-primary));
+            border-radius: var(--r-2xl); padding: 52px 40px;
+            text-align:center; position:relative; overflow:hidden;
+        }
+        .big-score-box::before {
+            content:''; position:absolute; inset:0;
+            background:radial-gradient(circle at 50% 0%, rgba(74,222,128,.22) 0%, transparent 55%);
+        }
+        .bscore-num {
+            font-family:var(--font-h); font-size: clamp(5rem,12vw,7.5rem);
+            font-weight:800; color:#fff; line-height:1; position:relative;
+        }
+        .bscore-num em { color:var(--cf-accent); font-style:normal; }
+        .bscore-lbl { font-family:var(--font-h); font-size:1.1rem; font-weight:600; color:rgba(255,255,255,.8); position:relative; margin-top:6px; }
+        .bscore-sub { font-size:.82rem; color:rgba(255,255,255,.42); margin-top:8px; position:relative; }
+        .insp-card {
+            background:#fff; border:1px solid var(--cf-gray-2);
+            border-radius:var(--r-md); padding:18px 18px;
+            display:flex; align-items:center; gap:12px;
+            transition:all .2s;
+        }
+        .insp-card:hover { border-color:rgba(22,101,52,.3); box-shadow:0 6px 20px rgba(22,101,52,.08); }
+        .insp-chk {
+            width:34px; height:34px; min-width:34px; border-radius:50%;
+            background:linear-gradient(135deg, var(--cf-primary-dark), var(--cf-primary));
+            display:flex; align-items:center; justify-content:center;
+            color:#fff; font-size:.75rem;
+        }
+        .insp-title { font-family:var(--font-h); font-size:.88rem; font-weight:700; color:var(--cf-text); margin-bottom:2px; }
+        .insp-cnt   { font-size:.72rem; color:var(--cf-text-light); }
+
+        /* ================================================
+           TESTIMONIALS
+        ================================================ */
+        .test-bg { background: var(--cf-gray-1); }
+        .test-card {
+            background:#fff; border:1px solid var(--cf-gray-2);
+            border-radius:var(--r-xl); padding:32px;
+            height:100%; transition:all .3s;
+        }
+        .test-card:hover { transform:translateY(-5px); box-shadow:0 18px 38px rgba(0,0,0,.08); }
+        .test-quote { font-size:2rem; color:var(--cf-primary); line-height:1; margin-bottom:14px; }
+        .test-stars { color:#fbbf24; font-size:.82rem; margin-bottom:18px; }
+        .test-text  { color:var(--cf-text); font-size:.94rem; line-height:1.82; margin-bottom:24px; }
+        .test-author { display:flex; align-items:center; gap:12px; }
+        .t-ava {
+            width:42px; height:42px; border-radius:50%;
+            background:linear-gradient(135deg, var(--cf-primary-dark), var(--cf-primary));
+            display:flex; align-items:center; justify-content:center;
+            font-family:var(--font-h); font-weight:700; color:#fff; font-size:.95rem;
+        }
+        .t-name { font-family:var(--font-h); font-weight:700; font-size:.88rem; color:var(--cf-text); margin-bottom:2px; }
+        .t-role { font-size:.72rem; color:var(--cf-text-light); }
+
+        /* ================================================
+           CITIES
+        ================================================ */
+        .city-pill {
+            display:inline-flex; align-items:center; gap:7px;
+            background:#fff; border:1px solid var(--cf-gray-2);
+            border-radius:50px; padding:9px 20px;
+            font-family:var(--font-h); font-weight:600; font-size:.88rem;
+            color:var(--cf-text); margin:5px; transition:all .2s; cursor:default;
+        }
+        .city-pill:hover {
+            border-color:var(--cf-primary);
+            color:var(--cf-primary);
+            transform:translateY(-2px);
+            box-shadow:0 6px 18px rgba(22,101,52,.12);
+        }
+        .city-dot { width:7px; height:7px; border-radius:50%; background:var(--cf-primary-light); }
+
+        /* ================================================
+           FINAL CTA
+        ================================================ */
+        .cta-bg {
+            background: linear-gradient(135deg, var(--cf-dark) 0%, var(--cf-primary-dark) 45%, var(--cf-dark) 100%);
+            position:relative; overflow:hidden;
+        }
+        .cta-bg::before {
+            content:''; position:absolute; inset:0;
+            background:radial-gradient(ellipse 65% 65% at 50% 50%, rgba(22,101,52,.28) 0%, transparent 65%);
+        }
+        .cta-title {
+            font-family:var(--font-h); font-size:clamp(2rem,5vw,3.6rem);
+            font-weight:800; color:#fff; line-height:1.12; letter-spacing:-.025em;
+        }
+        .cta-title .hl {
+            background:linear-gradient(135deg,#86efac,#22c55e);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+            background-clip:text;
+        }
+
+        /* ================================================
+           FOOTER
+        ================================================ */
+        .cf-footer { background:var(--cf-dark); padding:80px 0 0; border-top:1px solid rgba(255,255,255,.05); }
+        .footer-logo-text {
+            display:flex; align-items:center; gap:10px; margin-bottom:18px;
+            font-family:var(--font-h); font-weight:800; color:#fff;
+            font-size:1.25rem; letter-spacing:-.02em;
+        }
+        .footer-logo-mark {
+            width:40px; height:40px; background:var(--cf-primary);
+            border-radius:12px; display:flex; align-items:center;
+            justify-content:center; font-size:1.3rem;
+        }
+        .footer-desc { color:rgba(255,255,255,.38); font-size:.85rem; line-height:1.75; max-width:270px; }
+        .soc-links { display:flex; gap:8px; margin-top:22px; }
+        .soc-btn {
+            width:36px; height:36px; border-radius:10px;
+            background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.09);
+            display:flex; align-items:center; justify-content:center;
+            color:rgba(255,255,255,.42); font-size:.82rem;
+            transition:all .2s; text-decoration:none;
+        }
+        .soc-btn:hover { background:rgba(22,101,52,.28); border-color:rgba(74,222,128,.28); color:var(--cf-accent); }
+        .f-heading {
+            font-family:var(--font-h); font-weight:700; color:#fff;
+            font-size:.82rem; letter-spacing:.08em; text-transform:uppercase; margin-bottom:20px;
+        }
+        .f-links { list-style:none; padding:0; margin:0; }
+        .f-links li { margin-bottom:10px; }
+        .f-links a { color:rgba(255,255,255,.38); text-decoration:none; font-size:.85rem; transition:color .2s; }
+        .f-links a:hover { color:var(--cf-accent); }
+        .footer-bottom {
+            border-top:1px solid rgba(255,255,255,.06);
+            padding:22px 0; margin-top:60px;
+            display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+        }
+        .f-copy { font-size:.78rem; color:rgba(255,255,255,.25); }
+        .bs-credit {
+            font-size:.78rem; color:rgba(255,255,255,.25);
+            display:flex; align-items:center; gap:7px;
+        }
+        .bs-credit a {
+            color:var(--cf-accent); text-decoration:none;
+            font-weight:700; font-family:var(--font-h);
+            transition:opacity .2s;
+        }
+        .bs-credit a:hover { opacity:.75; }
+        .bs-credit .heart { color:#f87171; }
+
+        /* ================================================
+           MODALS
+        ================================================ */
+        .modal-content {
+            border:none; border-radius:var(--r-xl); overflow:hidden;
+            box-shadow:0 40px 80px rgba(0,0,0,.3);
+        }
+        .modal-header {
+            background:linear-gradient(135deg, var(--cf-primary-dark), var(--cf-primary));
+            border-bottom:none; padding:28px 32px 24px;
+        }
+        .modal-title { font-family:var(--font-h); font-weight:800; color:#fff; font-size:1.3rem; }
+        .modal-title-sub { font-size:.82rem; color:rgba(255,255,255,.55); margin-top:4px; }
+        .modal-header .btn-close { filter:brightness(0) invert(1); opacity:.65; }
+        .modal-body { padding:32px; }
+        .form-label { font-family:var(--font-h); font-weight:600; font-size:.84rem; color:var(--cf-text); margin-bottom:6px; }
+        .form-control, .form-select {
+            border:1.5px solid var(--cf-gray-2); border-radius:var(--r-sm);
+            padding:11px 15px; font-size:.88rem; transition:border-color .2s, box-shadow .2s;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color:var(--cf-primary);
+            box-shadow:0 0 0 3px rgba(22,101,52,.1); outline:none;
+        }
+        .btn-modal-submit {
+            background:linear-gradient(135deg, var(--cf-primary-light), var(--cf-primary));
+            color:#fff; border:none; padding:14px 28px;
+            border-radius:var(--r-sm); font-family:var(--font-h);
+            font-weight:700; font-size:.95rem; width:100%;
+            transition:all .3s; cursor:pointer;
+        }
+        .btn-modal-submit:hover {
+            transform:translateY(-2px);
+            box-shadow:0 10px 22px rgba(22,101,52,.32); color:#fff;
+        }
+
+        /* ================================================
+           UTILS / RESPONSIVE
+        ================================================ */
+        @media (max-width:992px) {
+            .hero-right { padding:20px 0 0; }
+            .float-badge { display:none; }
+        }
+        @media (max-width:768px) {
+            .cf-hero { padding:100px 0 60px; }
+            .hstat { min-width:50%; border-left:none; border-top:1px solid rgba(255,255,255,.08); padding:14px 0; }
+            .hstat:first-child { border-top:none; }
+            .titem { border-right:none; border-bottom:1px solid rgba(22,101,52,.1); width:100%; padding:12px 0; }
+            .step-arrow { display:none; }
+            .stat-card::after { display:none; }
+        }
+        @media (max-width:576px) {
+            .hero-cta-row { flex-direction:column; }
+            .btn-hero-primary, .btn-hero-secondary { justify-content:center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ================================================
+     NAVBAR
+================================================ -->
+<nav class="navbar navbar-expand-lg" id="cfNav">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <div class="footer-logo-text" style="margin-bottom:0; font-size:1.1rem;">
+                <div class="footer-logo-mark" style="width:36px;height:36px;border-radius:10px;font-size:1.15rem;">🚗</div>
+                Car Friend
+            </div>
+        </a>
+        <button class="navbar-toggler border-0 p-1" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <i class="fas fa-bars" style="color:rgba(255,255,255,.8);font-size:1.1rem;"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav mx-auto gap-1">
+                <li class="nav-item"><a class="nav-link" href="#how-it-works">For Sellers</a></li>
+                <li class="nav-item"><a class="nav-link" href="#for-dealers">For Dealers</a></li>
+                <li class="nav-item"><a class="nav-link" href="#inspection">Inspection</a></li>
+                <li class="nav-item"><a class="nav-link" href="#testimonials">Stories</a></li>
+                <li class="nav-item"><a class="nav-link" href="#cities">Cities</a></li>
+            </ul>
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn-nav-outline" data-bs-toggle="modal" data-bs-target="#dealerLoginModal">Dealer Login</button>
+                <button class="btn-nav-sell" data-bs-toggle="modal" data-bs-target="#sellCarModal">Sell Your Car</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<!-- ================================================
+     HERO
+================================================ -->
+<section class="cf-hero" id="home">
+    <div class="hero-bg-glow"></div>
+    <div class="hero-grid"></div>
+    <div class="container position-relative" style="z-index:2;">
+        <div class="row align-items-center g-5">
+            <!-- Left -->
+            <div class="col-lg-6">
+                <div class="hero-badge">
+                    <span class="pulse-dot"></span>
+                    Now Live Across 12 Indian Cities
+                </div>
+                <h1 class="hero-title">
+                    Your Car Deserves<br>
+                    <span class="grad">Its True Value.</span>
+                </h1>
+                <p class="hero-sub">
+                    300-point professional inspection. Live auctions to 850+ verified dealers. Aadhaar-secured deals. Get more — every time.
+                </p>
+                <div class="hero-cta-row">
+                    <button class="btn-hero-primary btn" data-bs-toggle="modal" data-bs-target="#sellCarModal">
+                        <i class="fas fa-car"></i> Sell Your Car
+                    </button>
+                    <button class="btn-hero-secondary btn" data-bs-toggle="modal" data-bs-target="#dealerLoginModal">
+                        <i class="fas fa-gavel"></i> Join the Auction
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="hstat">
+                        <div class="hstat-num">2,500<em>+</em></div>
+                        <div class="hstat-lbl">Cars Sold</div>
+                    </div>
+                    <div class="hstat">
+                        <div class="hstat-num">850<em>+</em></div>
+                        <div class="hstat-lbl">Verified Dealers</div>
+                    </div>
+                    <div class="hstat">
+                        <div class="hstat-num">300<em>+</em></div>
+                        <div class="hstat-lbl">Checkpoints</div>
+                    </div>
+                    <div class="hstat">
+                        <div class="hstat-num">12</div>
+                        <div class="hstat-lbl">Cities</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right -->
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="hero-right">
+                    <!-- Float badge top -->
+                    <div class="float-badge fb-top">
+                        <div class="fb-icon" style="background:rgba(74,222,128,.14);color:var(--cf-accent);">
+                            <i class="fas fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <div class="fb-title">Aadhaar Verified</div>
+                            <div class="fb-sub">Fraud-proof transactions</div>
+                        </div>
+                    </div>
+
+                    <!-- Auction card -->
+                    <div class="auction-glass">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <span class="live-pill"><span class="pulse-dot"></span>LIVE AUCTION</span>
+                            <span style="font-size:.72rem;color:rgba(255,255,255,.32);">Ends in</span>
+                        </div>
+                        <div class="ac-car-chip">
+                            <div class="ac-car-icon">🚗</div>
+                            <div>
+                                <div class="ac-car-name">Maruti Swift ZXI+</div>
+                                <div class="ac-car-meta">
+                                    <span><i class="fas fa-calendar-alt"></i> 2021</span>
+                                    <span><i class="fas fa-gauge-high"></i> 32,000 km</span>
+                                    <span><i class="fas fa-gas-pump"></i> Petrol</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bid-box">
+                            <div class="bid-box-lbl">Current Highest Bid</div>
+                            <div class="bid-box-amt">₹5,85,000</div>
+                            <div class="bid-box-cnt">14 dealers are competing right now</div>
+                        </div>
+                        <div class="timer-row">
+                            <i class="fas fa-clock" style="color:var(--cf-accent);"></i>
+                            Ending in &nbsp;
+                            <span class="timer-val" id="heroTimer">18:45</span>
+                        </div>
+                        <div class="dealer-row">
+                            <div class="davatar-stack">
+                                <div class="davatar">AR</div>
+                                <div class="davatar">MK</div>
+                                <div class="davatar">VS</div>
+                                <div class="davatar" style="font-size:.6rem;">+11</div>
+                            </div>
+                            <div class="dealer-lbl ms-2">14 dealers actively bidding</div>
+                        </div>
+                    </div>
+
+                    <!-- Float badge bottom -->
+                    <div class="float-badge fb-bot">
+                        <div class="fb-icon" style="background:rgba(251,191,36,.14);color:#fbbf24;">
+                            <i class="fas fa-file-lines"></i>
+                        </div>
+                        <div>
+                            <div class="fb-title">Report Generated</div>
+                            <div class="fb-sub">300 checkpoints &bull; Score 8.6/10</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================
+     TRUST STRIP
+================================================ -->
+<div class="trust-strip">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-6 col-md-3"><div class="titem"><div class="ticon"><i class="fas fa-id-card"></i></div><div class="ttext"><strong>Aadhaar Verified</strong><span>All parties verified</span></div></div></div>
+            <div class="col-6 col-md-3"><div class="titem"><div class="ticon"><i class="fas fa-credit-card"></i></div><div class="ttext"><strong>PAN Verified</strong><span>Zero fraud, guaranteed</span></div></div></div>
+            <div class="col-6 col-md-3"><div class="titem"><div class="ticon"><i class="fas fa-clipboard-list"></i></div><div class="ttext"><strong>300+ Checkpoints</strong><span>Certified inspection</span></div></div></div>
+            <div class="col-6 col-md-3"><div class="titem"><div class="ticon"><i class="fas fa-camera"></i></div><div class="ttext"><strong>100+ Photos</strong><span>Full documentation</span></div></div></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ================================================
+     HOW IT WORKS
+================================================ -->
+<section class="sec how-bg" id="how-it-works">
+    <div class="container">
+        <div class="text-center" style="margin-bottom:64px;">
+            <span class="eyebrow">For Car Sellers</span>
+            <h2 class="sec-title">Simple. Transparent. <span class="hl">Profitable.</span></h2>
+            <p class="sec-sub mx-auto">From your doorstep to final payment — we handle everything so you get the best deal, without any hassle.</p>
+        </div>
+        <div class="row g-4 position-relative">
+            <div class="col-md-6 col-lg-3 position-relative">
+                <div class="step-card">
+                    <div class="step-bg-num">01</div>
+                    <div class="step-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                    <div class="step-title">Submit Details</div>
+                    <p class="step-desc">Tell us about your car and preferred time slot. Our retail associate will call you within 2 hours to walk you through the process.</p>
+                </div>
+                <div class="step-arrow d-none d-lg-block"><i class="fas fa-chevron-right"></i></div>
+            </div>
+            <div class="col-md-6 col-lg-3 position-relative">
+                <div class="step-card">
+                    <div class="step-bg-num">02</div>
+                    <div class="step-icon"><i class="fas fa-magnifying-glass"></i></div>
+                    <div class="step-title">Free Home Inspection</div>
+                    <p class="step-desc">Our certified inspector visits your location. 300+ checkpoints, 100+ GPS-tagged photos. A professional report is generated instantly.</p>
+                </div>
+                <div class="step-arrow d-none d-lg-block"><i class="fas fa-chevron-right"></i></div>
+            </div>
+            <div class="col-md-6 col-lg-3 position-relative">
+                <div class="step-card">
+                    <div class="step-bg-num">03</div>
+                    <div class="step-icon"><i class="fas fa-gavel"></i></div>
+                    <div class="step-title">Live Dealer Auction</div>
+                    <p class="step-desc">Your car enters a live 30-minute auction with 850+ verified dealers. Real competition means real prices — always above what a single dealer offers.</p>
+                </div>
+                <div class="step-arrow d-none d-lg-block"><i class="fas fa-chevron-right"></i></div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="step-card">
+                    <div class="step-bg-num">04</div>
+                    <div class="step-icon"><i class="fas fa-wallet"></i></div>
+                    <div class="step-title">Get Paid Safely</div>
+                    <p class="step-desc">Accept the best bid. Both parties complete Aadhaar-verified digital signatures. Documents signed in-app. Deal closed. You get paid.</p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-5">
+            <button class="btn btn-nav-sell px-5 py-3 fs-6" data-bs-toggle="modal" data-bs-target="#sellCarModal">
+                Get My Free Valuation &nbsp;<i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================
+     STATS
+================================================ -->
+<section class="sec-sm stats-bg" id="stats">
+    <div class="container position-relative">
+        <div class="row text-center">
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <div class="stat-ico"><i class="fas fa-car"></i></div>
+                    <div class="stat-num" data-target="2500">0<em>+</em></div>
+                    <div class="stat-lbl">Cars Successfully Sold</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <div class="stat-ico"><i class="fas fa-store"></i></div>
+                    <div class="stat-num" data-target="850">0<em>+</em></div>
+                    <div class="stat-lbl">Verified Dealer Partners</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <div class="stat-ico"><i class="fas fa-location-dot"></i></div>
+                    <div class="stat-num" data-target="12">0</div>
+                    <div class="stat-lbl">Cities &amp; Growing</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <div class="stat-ico"><i class="fas fa-star"></i></div>
+                    <div class="stat-num">4.8<em>★</em></div>
+                    <div class="stat-lbl">Average Seller Rating</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================
+     FOR DEALERS
+================================================ -->
+<section class="sec dealers-bg" id="for-dealers">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-5">
+                <span class="eyebrow eyebrow-light">For Dealerships</span>
+                <h2 class="sec-title-light">Access India's Largest <span class="hl">Verified Car Auction</span></h2>
+                <p style="color:rgba(255,255,255,.5);font-size:.98rem;line-height:1.82;margin-bottom:36px;">Bid on thoroughly inspected, fully documented vehicles. Every car comes with a 300-point report, Aadhaar-verified sellers, and full ownership history — so you bid with complete confidence.</p>
+
+                <div class="dealer-feat">
+                    <div class="dealer-feat-icon"><i class="fas fa-bolt"></i></div>
+                    <div>
+                        <div class="dealer-feat-title">Live 30-Minute Auctions</div>
+                        <div class="dealer-feat-desc">Real-time competitive bidding with smart auto-extension in the final seconds. Fair, transparent, and exhilarating.</div>
+                    </div>
+                </div>
+                <div class="dealer-feat">
+                    <div class="dealer-feat-icon"><i class="fas fa-file-invoice"></i></div>
+                    <div>
+                        <div class="dealer-feat-title">Full Inspection Reports</div>
+                        <div class="dealer-feat-desc">300+ checkpoints, 100+ photos, condition grading, damage mapping — everything you need before placing a single bid.</div>
+                    </div>
+                </div>
+                <div class="dealer-feat">
+                    <div class="dealer-feat-icon"><i class="fas fa-computer-mouse"></i></div>
+                    <div>
+                        <div class="dealer-feat-title">OCB — One Click Buy</div>
+                        <div class="dealer-feat-desc">Exclusive post-auction opportunity. Priority access to confirmed vehicles at negotiated prices. First right — always.</div>
+                    </div>
+                </div>
+                <button class="btn-hero-primary btn mt-2" data-bs-toggle="modal" data-bs-target="#dealerRegisterModal">
+                    <i class="fas fa-store"></i> Register as Dealer
+                </button>
+            </div>
+
+            <div class="col-lg-7">
+                <div class="auction-panel">
+                    <div class="ap-header">
+                        <div>
+                            <div class="ap-header-title">Car Friend Auction Platform</div>
+                            <div class="ap-header-sub">Live now — 6 active auctions running</div>
+                        </div>
+                        <span class="live-pill"><span class="pulse-dot"></span>LIVE</span>
+                    </div>
+                    <div class="ap-row">
+                        <div class="ap-thumb"><i class="fas fa-car"></i></div>
+                        <div class="ap-info">
+                            <div class="ap-car-name">Hyundai Creta SX 2022</div>
+                            <div class="ap-car-meta">28,500 km &bull; Delhi NCR &bull; 1st Owner</div>
+                            <span class="status-live">LIVE</span>
+                        </div>
+                        <div class="ap-bid">
+                            <div class="ap-bid-amt">₹13.2L</div>
+                            <div class="ap-bid-sub">19 bids &bull; 12:30 left</div>
+                        </div>
+                    </div>
+                    <div class="ap-row">
+                        <div class="ap-thumb"><i class="fas fa-car-side"></i></div>
+                        <div class="ap-info">
+                            <div class="ap-car-name">Tata Nexon EV Max 2023</div>
+                            <div class="ap-car-meta">15,200 km &bull; Mumbai &bull; 1st Owner</div>
+                            <span class="status-live">LIVE</span>
+                        </div>
+                        <div class="ap-bid">
+                            <div class="ap-bid-amt">₹17.8L</div>
+                            <div class="ap-bid-sub">23 bids &bull; 8:12 left</div>
+                        </div>
+                    </div>
+                    <div class="ap-row">
+                        <div class="ap-thumb"><i class="fas fa-van-shuttle"></i></div>
+                        <div class="ap-info">
+                            <div class="ap-car-name">Maruti Ertiga VXI 2021</div>
+                            <div class="ap-car-meta">42,000 km &bull; Pune &bull; 2nd Owner</div>
+                            <span class="status-ocb">OCB</span>
+                        </div>
+                        <div class="ap-bid">
+                            <div class="ap-bid-amt">₹8.5L</div>
+                            <div class="ap-bid-sub">Instant buy available</div>
+                        </div>
+                    </div>
+                    <div class="ap-row">
+                        <div class="ap-thumb"><i class="fas fa-car"></i></div>
+                        <div class="ap-info">
+                            <div class="ap-car-name">Honda City ZX 2020</div>
+                            <div class="ap-car-meta">55,000 km &bull; Bangalore &bull; 1st Owner</div>
+                            <span class="status-ocb">OCB</span>
+                        </div>
+                        <div class="ap-bid">
+                            <div class="ap-bid-amt">₹9.2L</div>
+                            <div class="ap-bid-sub">Instant buy available</div>
+                        </div>
+                    </div>
+                    <div class="ap-footer">
+                        <button class="btn-ap-more" data-bs-toggle="modal" data-bs-target="#dealerLoginModal">
+                            View All Active Auctions &nbsp;<i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================
+     WHY CHOOSE US
+================================================ -->
+<section class="sec" id="why-us" style="background:#fff;">
+    <div class="container">
+        <div class="text-center" style="margin-bottom:64px;">
+            <span class="eyebrow">Why Car Friend</span>
+            <h2 class="sec-title">Built Different. <span class="hl">Built Better.</span></h2>
+            <p class="sec-sub mx-auto">We've rethought every step of the used car transaction to eliminate guesswork, opacity, and mistrust — permanently.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="feat-card">
+                    <div class="feat-icon-wrap" style="background:rgba(22,101,52,.08);">🔍</div>
+                    <div class="feat-title">300+ Point Inspection</div>
+                    <p class="feat-desc">Our certified inspectors check every mechanical, electrical, structural, and cosmetic aspect. Nothing left to chance — ever.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feat-card">
+                    <div class="feat-icon-wrap" style="background:rgba(59,130,246,.08);">⚡</div>
+                    <div class="feat-title">Live Competitive Auctions</div>
+                    <p class="feat-desc">Real-time bidding from 850+ verified dealers nationwide drives genuine price discovery. No backroom deals — just transparent competition.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feat-card">
+                    <div class="feat-icon-wrap" style="background:rgba(139,92,246,.08);">🛡️</div>
+                    <div class="feat-title">End-to-End Verification</div>
+                    <p class="feat-desc">Every seller and buyer undergoes Aadhaar & PAN verification. Digital agreement signing with biometric confirmation for completely fraud-proof deals.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feat-card">
+                    <div class="feat-icon-wrap" style="background:rgba(251,191,36,.08);">📊</div>
+                    <div class="feat-title">Transparent Valuation</div>
+                    <p class="feat-desc">Detailed inspection score, live market comparison, and expert valuation report — you always know exactly what your car is worth and why.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feat-card">
+                    <div class="feat-icon-wrap" style="background:rgba(239,68,68,.08);">📍</div>
+                    <div class="feat-title">Doorstep Service</div>
+                    <p class="feat-desc">We come to you. Our inspector visits at your preferred time. Zero need to drive anywhere, visit a showroom, or negotiate alone.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feat-card">
+                    <div class="feat-icon-wrap" style="background:rgba(34,197,94,.08);">✍️</div>
+                    <div class="feat-title">Digital Deal Closure</div>
+                    <p class="feat-desc">From agreement to handover — everything is digital and permanently documented. Both parties sign in-app with Aadhaar-verified signatures.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================
+     INSPECTION SECTION
+================================================ -->
+<section class="sec insp-bg" id="inspection">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-5">
+                <span class="eyebrow">Inspection Excellence</span>
+                <h2 class="sec-title">India's Most <span class="hl">Thorough</span> Car Inspection</h2>
+                <p class="sec-sub">Not 50 points. Not 100. We check over 300 individual aspects of every car — because your buyers deserve the full picture.</p>
+                <div class="big-score-box mt-4">
+                    <div class="bscore-num">300<em>+</em></div>
+                    <div class="bscore-lbl">Inspection Checkpoints</div>
+                    <div class="bscore-sub">+ 100 photos &nbsp;&bull;&nbsp; GPS-tagged &nbsp;&bull;&nbsp; Timestamped</div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="row g-3">
+                    <div class="col-6"><div class="insp-card"><div class="insp-chk"><i class="fas fa-check"></i></div><div><div class="insp-title">Exterior Body</div><div class="insp-cnt">52 checkpoints</div></div></div></div>
+                    <div class="col-6"><div class="insp-card"><div class="insp-chk"><i class="fas fa-check"></i></div><div><div class="insp-title">Engine &amp; Drivetrain</div><div class="insp-cnt">68 checkpoints</div></div></div></div>
+                    <div class="col-6"><div class="insp-card"><div class="insp-chk"><i class="fas fa-check"></i></div><div><div class="insp-title">Interior &amp; Cabin</div><div class="insp-cnt">45 checkpoints</div></div></div></div>
+                    <div class="col-6"><div class="insp-card"><div class="insp-chk"><i class="fas fa-check"></i></div><div><div class="insp-title">Electricals &amp; AC</div><div class="insp-cnt">38 checkpoints</div></div></div></div>
+                    <div class="col-6"><div class="insp-card"><div class="insp-chk"><i class="fas fa-check"></i></div><div><div class="insp-title">Tyres &amp; Suspension</div><div class="insp-cnt">28 checkpoints</div></div></div></div>
+                    <div class="col-6"><div class="insp-card"><div class="insp-chk"><i class="fas fa-check"></i></div><div><div class="insp-title">Test Drive Eval</div><div class="insp-cnt">35 checkpoints</div></div></div></div>
+                    <div class="col-6"><div class="insp-card"><div class="insp-chk"><i class="fas fa-check"></i></div><div><div class="insp-title">Documents &amp; RC</div><div class="insp-cnt">24 checkpoints</div></div></div></div>
+                    <div class="col-6"><div class="insp-card"><div class="insp-chk"><i class="fas fa-check"></i></div><div><div class="insp-title">Accident History</div><div class="insp-cnt">18 checkpoints</div></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================
+     TESTIMONIALS
+================================================ -->
+<section class="sec test-bg" id="testimonials">
+    <div class="container">
+        <div class="text-center" style="margin-bottom:64px;">
+            <span class="eyebrow">Real Stories</span>
+            <h2 class="sec-title">Real People. <span class="hl">Real Results.</span></h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="test-card">
+                    <div class="test-quote">"</div>
+                    <div class="test-stars">★★★★★</div>
+                    <p class="test-text">Got ₹2.3 lakhs more than what a local dealer offered me. The inspection report gave me full confidence and watching the live auction was amazing. Completely transparent.</p>
+                    <div class="test-author"><div class="t-ava">RK</div><div><div class="t-name">Rajesh Kumar</div><div class="t-role">Car Seller &bull; Mumbai</div></div></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="test-card">
+                    <div class="test-quote">"</div>
+                    <div class="test-stars">★★★★★</div>
+                    <p class="test-text">As a dealership, this is the most reliable sourcing platform we've used. Every car has a proper report — zero surprises after purchase. We bid 3–4 cars every single week now.</p>
+                    <div class="test-author"><div class="t-ava">AV</div><div><div class="t-name">AutoVista Motors</div><div class="t-role">Verified Dealer &bull; Delhi NCR</div></div></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="test-card">
+                    <div class="test-quote">"</div>
+                    <div class="test-stars">★★★★★</div>
+                    <p class="test-text">The inspector came to my home, did the full check in under 2 hours, and within 3 days my car was sold at a price I was very happy with. Professional from start to finish.</p>
+                    <div class="test-author"><div class="t-ava">PS</div><div><div class="t-name">Priya Sharma</div><div class="t-role">Car Seller &bull; Bangalore</div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================
+     CITIES
+================================================ -->
+<section class="sec-sm" style="background:#fff;" id="cities">
+    <div class="container text-center">
+        <span class="eyebrow">Now Operational</span>
+        <h2 class="sec-title">12 Cities &amp; <span class="hl">Expanding Fast</span></h2>
+        <p class="sec-sub mx-auto" style="margin-bottom:40px;">We're growing rapidly. Not in your city yet? Register your interest and be first when we launch near you.</p>
+        <div class="d-flex flex-wrap justify-content-center">
+            <span class="city-pill"><span class="city-dot"></span>Mumbai</span>
+            <span class="city-pill"><span class="city-dot"></span>Delhi NCR</span>
+            <span class="city-pill"><span class="city-dot"></span>Bangalore</span>
+            <span class="city-pill"><span class="city-dot"></span>Hyderabad</span>
+            <span class="city-pill"><span class="city-dot"></span>Pune</span>
+            <span class="city-pill"><span class="city-dot"></span>Chennai</span>
+            <span class="city-pill"><span class="city-dot"></span>Ahmedabad</span>
+            <span class="city-pill"><span class="city-dot"></span>Jaipur</span>
+            <span class="city-pill"><span class="city-dot"></span>Kolkata</span>
+            <span class="city-pill"><span class="city-dot"></span>Surat</span>
+            <span class="city-pill"><span class="city-dot"></span>Lucknow</span>
+            <span class="city-pill"><span class="city-dot"></span>Chandigarh</span>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================
+     FINAL CTA
+================================================ -->
+<section class="sec cta-bg">
+    <div class="container text-center position-relative" style="z-index:2;">
+        <span class="eyebrow eyebrow-light" style="margin-bottom:22px;display:inline-block;">Ready to Start?</span>
+        <h2 class="cta-title mb-4">
+            Get the <span class="hl">True Value</span><br>
+            of Your Car — Today.
+        </h2>
+        <p style="color:rgba(255,255,255,.48);font-size:1rem;max-width:460px;margin:0 auto 42px;line-height:1.8;">
+            Join 2,500+ satisfied sellers. Free inspection, zero pressure, genuine results backed by real dealer competition.
+        </p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <button class="btn-hero-primary btn btn-lg" data-bs-toggle="modal" data-bs-target="#sellCarModal">
+                <i class="fas fa-car"></i> Get Free Inspection
+            </button>
+            <button class="btn-hero-secondary btn btn-lg" data-bs-toggle="modal" data-bs-target="#dealerRegisterModal">
+                <i class="fas fa-store"></i> Join as Dealer
+            </button>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================
+     FOOTER
+================================================ -->
+<footer class="cf-footer">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-4">
+                <div class="footer-logo-text">
+                    <div class="footer-logo-mark">🚗</div>
+                    Car Friend
+                </div>
+                <p class="footer-desc">India's smartest used car marketplace. Transparent inspections, live auctions, verified transactions — from inspection to ownership, we've got you.</p>
+                <div class="soc-links">
+                    <a href="#" class="soc-btn"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="soc-btn"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="soc-btn"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="soc-btn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="soc-btn"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="f-heading">For Sellers</div>
+                <ul class="f-links">
+                    <li><a href="#">Sell Your Car</a></li>
+                    <li><a href="#">Free Inspection</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Valuation Guide</a></li>
+                    <li><a href="#">Seller FAQs</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="f-heading">For Dealers</div>
+                <ul class="f-links">
+                    <li><a href="#">Register as Dealer</a></li>
+                    <li><a href="#">Live Auctions</a></li>
+                    <li><a href="#">OCB — Buy Now</a></li>
+                    <li><a href="#">Dealer Benefits</a></li>
+                    <li><a href="#">Dealer FAQs</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="f-heading">Company</div>
+                <ul class="f-links">
+                    <li><a href="#">About Car Friend</a></li>
+                    <li><a href="#">Our Inspectors</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press &amp; Media</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="f-heading">Legal</div>
+                <ul class="f-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">Auction Rules</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="f-copy">© 2024 Car Friend. All rights reserved. India's Trusted Used Car Marketplace.</div>
+            <div class="bs-credit">
+                <i class="fas fa-code" style="color:var(--cf-accent);font-size:.72rem;"></i>
+                Crafted with <span class="heart">♥</span> by
+                <a href="#" target="_blank">Big Scoop Studio</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ================================================
+     MODAL: SELL YOUR CAR
+================================================ -->
+<div class="modal fade" id="sellCarModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <div class="modal-title">Sell Your Car</div>
+                    <div class="modal-title-sub">Free inspection &bull; Doorstep service &bull; Best price guaranteed</div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">Full Name</label><input type="text" class="form-control" placeholder="Rajesh Kumar"></div>
+                    <div class="col-md-6"><label class="form-label">Mobile Number</label><input type="tel" class="form-control" placeholder="+91 98765 43210"></div>
+                    <div class="col-md-6">
+                        <label class="form-label">Car Brand</label>
+                        <select class="form-select">
+                            <option value="">Select brand</option>
+                            <option>Maruti Suzuki</option><option>Hyundai</option><option>Tata</option>
+                            <option>Honda</option><option>Toyota</option><option>Mahindra</option>
+                            <option>Kia</option><option>MG</option><option>Volkswagen</option><option>Other</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6"><label class="form-label">Car Model</label><input type="text" class="form-control" placeholder="e.g. Swift ZXI, Creta SX"></div>
+                    <div class="col-md-4">
+                        <label class="form-label">Year</label>
+                        <select class="form-select">
+                            <option value="">Year</option>
+                            <option>2024</option><option>2023</option><option>2022</option><option>2021</option>
+                            <option>2020</option><option>2019</option><option>2018</option><option>2017</option>
+                            <option>2016</option><option>2015 or older</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">KM Driven</label>
+                        <select class="form-select">
+                            <option value="">KM range</option>
+                            <option>Under 20,000</option><option>20,000 – 50,000</option>
+                            <option>50,000 – 80,000</option><option>80,000 – 1,20,000</option>
+                            <option>1,20,000+</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Your City</label>
+                        <select class="form-select">
+                            <option value="">Select city</option>
+                            <option>Mumbai</option><option>Delhi NCR</option><option>Bangalore</option>
+                            <option>Hyderabad</option><option>Pune</option><option>Chennai</option>
+                            <option>Ahmedabad</option><option>Other</option>
+                        </select>
+                    </div>
+                    <div class="col-12"><label class="form-label">Expected Price <span style="font-weight:400;color:var(--cf-text-light);">(Optional)</span></label><input type="text" class="form-control" placeholder="₹ Your expected selling price"></div>
+                    <div class="col-12 mt-1">
+                        <button class="btn-modal-submit btn">Book Free Inspection &nbsp;<i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="col-12 text-center">
+                        <small style="color:var(--cf-text-light);"><i class="fas fa-lock" style="color:var(--cf-primary);"></i>&nbsp; Your details are 100% secure. We'll call you within 2 hours.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ================================================
+     MODAL: DEALER LOGIN
+================================================ -->
+<div class="modal fade" id="dealerLoginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <div class="modal-title">Dealer Portal Login</div>
+                    <div class="modal-title-sub">Access live auctions &amp; OCB listings</div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-12"><label class="form-label">Registered Mobile / Email</label><input type="text" class="form-control" placeholder="Mobile number or email address"></div>
+                    <div class="col-12"><label class="form-label">Password</label><input type="password" class="form-control" placeholder="Enter your password"></div>
+                    <div class="col-12 d-flex justify-content-between align-items-center">
+                        <div class="form-check mb-0"><input type="checkbox" class="form-check-input" id="remMe"><label class="form-check-label" for="remMe" style="font-size:.85rem;">Remember me</label></div>
+                        <a href="#" style="color:var(--cf-primary);font-size:.85rem;text-decoration:none;font-weight:600;">Forgot Password?</a>
+                    </div>
+                    <div class="col-12 mt-1">
+                        <button class="btn-modal-submit btn">Login to Auction Portal &nbsp;<i class="fas fa-gavel"></i></button>
+                    </div>
+                    <div class="col-12 text-center">
+                        <span style="font-size:.85rem;color:var(--cf-text-light);">Not registered? </span>
+                        <a href="#" style="color:var(--cf-primary);font-weight:700;text-decoration:none;font-size:.85rem;" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#dealerRegisterModal">Register as Dealer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ================================================
+     MODAL: DEALER REGISTER
+================================================ -->
+<div class="modal fade" id="dealerRegisterModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <div class="modal-title">Register as Dealer Partner</div>
+                    <div class="modal-title-sub">Access 850+ cars monthly in live auctions</div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label">Dealership Name</label><input type="text" class="form-control" placeholder="Your dealership name"></div>
+                    <div class="col-md-6"><label class="form-label">Contact Person</label><input type="text" class="form-control" placeholder="Full name"></div>
+                    <div class="col-md-6"><label class="form-label">Mobile Number</label><input type="tel" class="form-control" placeholder="+91 98765 43210"></div>
+                    <div class="col-md-6"><label class="form-label">Email Address</label><input type="email" class="form-control" placeholder="dealer@yourshop.com"></div>
+                    <div class="col-md-6"><label class="form-label">GST Number</label><input type="text" class="form-control" placeholder="22AAAAA0000A1Z5"></div>
+                    <div class="col-md-6">
+                        <label class="form-label">City</label>
+                        <select class="form-select">
+                            <option value="">Select your city</option>
+                            <option>Mumbai</option><option>Delhi NCR</option><option>Bangalore</option>
+                            <option>Hyderabad</option><option>Pune</option><option>Chennai</option>
+                            <option>Ahmedabad</option><option>Other</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6"><label class="form-label">Preferred Car Brands</label><input type="text" class="form-control" placeholder="e.g. Maruti, Hyundai, Tata"></div>
+                    <div class="col-md-6">
+                        <label class="form-label">Monthly Purchase Capacity</label>
+                        <select class="form-select">
+                            <option value="">Select range</option>
+                            <option>1–5 cars / month</option><option>5–15 cars / month</option>
+                            <option>15–30 cars / month</option><option>30+ cars / month</option>
+                        </select>
+                    </div>
+                    <div class="col-12 mt-1">
+                        <button class="btn-modal-submit btn">Submit Registration &nbsp;<i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="col-12 text-center">
+                        <small style="color:var(--cf-text-light);"><i class="fas fa-shield-halved" style="color:var(--cf-primary);"></i>&nbsp; Aadhaar &amp; PAN verification required after registration.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    /* Navbar scroll */
+    const nav = document.getElementById('cfNav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 48);
+    });
+
+    /* Hero countdown timer */
+    (function () {
+        let s = 18 * 60 + 45;
+        const el = document.getElementById('heroTimer');
+        if (!el) return;
+        setInterval(() => {
+            s = s > 0 ? s - 1 : 18 * 60 + 45;
+            el.textContent = `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+        }, 1000);
+    })();
+
+    /* Stat counter animation */
+    const cObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            const el = e.target, target = +el.dataset.target;
+            if (!target) return;
+            const suffix = el.querySelector('em') ? el.querySelector('em').outerHTML : '';
+            let cur = 0, step = target / 55;
+            const tick = setInterval(() => {
+                cur = Math.min(cur + step, target);
+                el.innerHTML = Math.floor(cur).toLocaleString('en-IN') + suffix;
+                if (cur >= target) clearInterval(tick);
+            }, 28);
+            cObs.unobserve(el);
+        });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.stat-num[data-target]').forEach(el => cObs.observe(el));
+
+    /* Smooth scroll */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+        });
+    });
+</script>
+</body>
+</html>
